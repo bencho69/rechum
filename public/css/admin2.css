@@ -1,0 +1,31 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+
+.menu {
+	height: 25px;
+	position: absolute;
+	width: 300px;
+}
+
+.menu ul li ul li{
+	position: relative;
+	-webkit-box-shadow: 1px 1px 3px #454545;
+	-moz-box-shadow: 1px 1px 3px #454545;
+	box-shadow: 1px 1px 3px #454545;
+}
+
+.menu a {
+	width: 200px
+	padding: 10px;
+	display: block;
+	color:#fff;
+	border-bottom: lpx solid rgba(255,255,255,0.3);
+	background: rgba(25,25,25,0.3); **/
+	-webkit-box-shadow: 1px 1px 3px #252525;
+	-moz-box-shadow: 1px 1px 3px #252525;
+	box-shadow: 1px 1px 3px #252525;
+}

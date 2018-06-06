@@ -1,0 +1,24 @@
+
+main .cuerpo{
+  display:block;
+  width: 100%;
+  margin:auto;
+  left: 0px;
+  padding: 5px;
+  text-align: justify-all;
+
+  background: rgba(51,51,51,0.3); 
+}
+
+@media (min-width: 700px){
+	main .cuerpo{
+		position: relative;
+		display: inline-block;
+		top: 0px;
+		left: 255px;
+		width:70vw;
+		padding: 15px;
+		height: auto;
+	}	
+}
+
