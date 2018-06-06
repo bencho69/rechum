@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"> 
+    <title> RecHum </title>
+    <?php echo $__env->make('links', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</head>
+<BODY>
+   <?php echo $__env->make('menu', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+  <section id="info">
+  </section>
+  <main>          
+      <?php echo $__env->yieldContent('content'); ?>
+  </main>
+        
+  <?php echo $__env->make('pie', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<?php $__env->startSection('content'); ?>
+          <section id="blog">
+            <div class="contenedor">
+               <article>
+                <a href="registro"> <img src="media/banners-actualiza-datos.jpg"> </a>
+               </article>
+               <article>
+                <a href="registro"><img src="media/banner.jpg"> </a>
+                <a href="registro" class="btn btn-success">Modificar Datos Personales.</a>
+               </article>
+               
+             </div> 
+           </section>
+
+            <section id="info">
+                <h3>Actualiza tus datos personales.</h3>
+                <div class="contenedor">
+                    <div class="info-tema">
+                        <img src="media/factorRH.jpg" alt="">
+                        <h4>Factor RH?</h4>
+                    </div>
+                    <div class="info-tema">
+                        <img src="media/cambiar-el-domicilio-fiscal.jpg" alt="">
+                        <h4>Cambio Domicilio?</h4>
+                    </div>
+                    <div class="info-tema">
+                        <img src="media/Accidente.jpg" alt="">
+                        <h4>En caso de accidente llamar a...</h4>
+                    </div>
+                    <div class="info-tema">
+                        <img src="media/EstadoCivil.jpg" alt="">
+                        <h4>Estado Civil?</h4>
+                    </div>                    
+                </div>
+            </section>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('principal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
