@@ -1,7 +1,7 @@
 # rechum
 Recursos Humanos
 
-El sistema de recursos humanos se crea para administrar los empleados de una emppresa.
+El sistema de recursos humanos se crea para administrar los empleados de una empresa.
 
 Esta version permite restaurar el password olvidado, aunque no esta terminado al 100% ya que falta la configuracion del cliente SMTP, aunque las vitas ya estan creadas.
 
