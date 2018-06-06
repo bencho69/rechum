@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: RecHum
+        psr4_prefix: RecHum
+        src_path: app
