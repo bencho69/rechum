@@ -36,19 +36,19 @@
           </a>
           <ul class="treeview-menu">
             @if(Auth::user()->tipo == "ADMIN")
-            @if( $active==1 and $subm == 1 and $subm2 == 0)  
-            <li class="active">
-            @else
-            <li>
+              @if( $active==1 and $subm == 1 and $subm2 == 0)  
+                <li class="active">
+              @else
+                <li>
+              @endif
+              <a href="/usuarios/lista"><i class="fa fa-circle-o"></i>Usuarios</a></li>
+              @endif
+              @if( $active==1 and $subm == 2 and $subm2 == 0)  
+                <li class="active">
+              @else
+                <li>
             @endif
-            <a href="/users"><i class="fa fa-circle-o"></i>Usuarios</a></li>
-            @endif
-            @if( $active==1 and $subm == 2 and $subm2 == 0)  
-            <li class="active">
-            @else
-            <li>
-            @endif
-            <a href="/users/perfil"><i class="fa fa-circle-o"></i> Perfil</a></li>
+            <a href="/perfil"><i class="fa fa-circle-o"></i> Perfil</a></li>
           </ul>
         </li>
           @if( $active == 2)  
@@ -58,106 +58,20 @@
           @endif
           <a href="#">
             <i class="fa fa-files-o"></i>
-            <span>Catálogos</span>
+            <span>Empleados</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-
-          <ul class="treeview-menu">
-          @if(Auth::user()->tipo == "ADMIN")
-          @if( $active == 2 and $subm == 1)  
-            <li class="treeview active">
-          @else
-            <li class="treeview">  
-          @endif
-
-              <a href="#"><i class="fa fa-circle-o"></i>Años
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </ span>
-              </a>
-              <ul class="treeview-menu">
-
-                @if( $active==2 and $subm == 1 and $subm2 == 1)  
-                <li class="active">
-                @else
-                <li>  
+              <ul class="treeview-menu">  
+                @if(Auth::user()->tipo == "ADMIN")
+                <li>  <a href="/empleados/lista"><i class="fa fa-circle-o"></i>Lista Empleados</a>  </li>
                 @endif
-                  <a href="/annos/index"><i class="fa fa-circle-o"></i>Lista de años</a>
-                </li>
-                @if( $active==2 and $subm == 1 and $subm2 == 2)  
-                <li class="active">
-                @else
-                <li>  
+                <li>  <a href="/empleados/personal"><i class="fa fa-circle-o"></i>Datos Personales</a>  </li>
+                @if(Auth::user()->tipo == "ADMIN")
+                <li>  <a href="/empleados/create"><i class="fa fa-circle-o"></i>Crear nuevo    </a>  </li>
                 @endif
-                  <a href="/annos/create"><i class="fa fa-circle-o"></i>Crear nuevo año            
-                  </a>
-                </li>
-              </ul>
-            </li>
-            @endif
-            @if(Auth::user()->tipo == "ADMIN")
-            @if( $active==2 and $subm == 3 )  
-            <li class="treeview active">
-            @else
-            <li class="treeview">  
-            @endif
-              <a href="#"><i class="fa fa-circle-o"></i>Estados
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                @if( $active==2 and $subm == 3 and $subm2 == 1)  
-                <li class="active">
-                @else
-                <li>  
-                @endif
-                  <a href="/estados"><i class="fa fa-circle-o"></i>Lista de Estados</a>
-                </li>
-                @if( $active==2 and $subm == 3 and $subm2 == 2)  
-                <li class="active">
-                @else
-                <li>  
-                @endif
-                  <a href="/estados/create"><i class="fa fa-circle-o"></i>Crear Estado
-                  </a>
-                </li>
-              </ul>
-            </li>
-            @endif
-            @if(Auth::user()->tipo == "ADMIN")
-            @if( $active==2 and $subm == 2)  
-              <li class="treeview active">
-            @else
-              <li class="treeview">  
-            @endif
-              <a href="#"><i class="fa fa-circle-o"></i>Municipios
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                @if( $active==2 and $subm == 2 and $subm2 == 1)  
-                <li class="active">
-                @else
-                <li>  
-                @endif
-                <a href="/mpos"><i class="fa fa-circle-o"></i>Lista de Municipios</a></li>
-                @if( $active==2 and $subm == 2 and$subm2 == 2)  
-                <li class="active">
-                @else
-                <li>  
-                @endif
-                  <a href="/mpos/create"><i class="fa fa-circle-o"></i>Crear Municipio
-                  </a>
-                </li>
-              </ul>
-            </li>      
-            @endif     
-          </ul>
-          
+              </ul>        
         </li>
         <li class="treeview">
           <a href="#">
@@ -267,6 +181,6 @@
           </ul>
         </li>
         <li class="header">ACCIONES</li>
-        <li><a href="logout"><i class="fa fa-circle-o text-red"></i> <span>Salir</span></a></li>
+        <li><a href="/logout"><i class="fa fa-circle-o text-red"></i> <span>Salir</span></a></li>
       </ul>
     </section>

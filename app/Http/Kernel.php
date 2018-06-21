@@ -29,5 +29,6 @@ class Kernel extends HttpKernel
         'auth' => \RecHum\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \RecHum\Http\Middleware\RedirectIfAuthenticated::class,
+        'admin' => \RecHum\Http\Middleware\Admin::class,
     ];
 }
