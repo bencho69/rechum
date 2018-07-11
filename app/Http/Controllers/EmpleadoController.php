@@ -8,11 +8,12 @@ use RecHum\Http\Requests;
 use RecHum\Http\Controllers\Controller;
 
 use DB;
-use empleados;
+use RecHum\empleados;
 use Auth;
 use Session;
 use Redirect;
 use Mpdf\Mpdf;
+use Illuminate\Support\Facades\Storage;
 
 class EmpleadoController extends Controller
 {
@@ -29,7 +30,8 @@ class EmpleadoController extends Controller
     }
 
     public function index()
-    { 
+    {       
+
         if (Auth::user()->tipo !== "ADMIN") {  
             $empleados = DB::select('Select * from empleados order by apaterno');
             return view('admin.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','empleados'=>$empleados]);
@@ -46,7 +48,7 @@ class EmpleadoController extends Controller
     public function create()
     {
          // obtenemos el numero de contratos parea asignar el siguiente.
-         $empleado = DB::select('select max(numero) as NumeroCont from empleados');
+         $empleado = DB::select('select max(no) as NumeroCont from empleados');
          $empleado = $empleado[0]->NumeroCont+1;
          // obtenemos la lista de Puestos
          $puestos = DB::select('select puesto, id from funciones order by puesto');
@@ -61,7 +63,7 @@ class EmpleadoController extends Controller
      */
     public function store(Request $request)
     {
-         return "estoy guardando cambios";
+         return "estoy guardando nuevo";
     }
 
     /**
@@ -75,7 +77,10 @@ class EmpleadoController extends Controller
         $empleado = DB::table('empleados')
                       ->where('id','=', $id)
                       ->first();
-          return view('empleados.editarall',['active'=>2, 'subm'=>1, 'subm2'=>0,'accion'=>0,'empleado'=>$empleado]); 
+        $puestos = DB::table('funciones')
+                      ->orderby('puesto','ASC')
+                      ->get();
+        return view('empleados.editarall',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','accion'=>'0','empleado'=>$empleado,'puestos'=>$puestos]); 
     }
 
     /**
@@ -89,7 +94,10 @@ class EmpleadoController extends Controller
         $empleado = DB::table('empleados')
                       ->where('id','=', $id)
                       ->first();
-          return view('empleados.index',['active'=>2, 'subm'=>1, 'subm2'=>0,'accion'=>0,'empleado'=>$empleado]);
+        $puestos = DB::table('funciones')
+                      ->orderby('puesto','ASC')
+                      ->get();
+        return view('empleados.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','accion'=>'0','empleado'=>$empleado,'puestos'=>$puestos]);
     }
 
     /**
@@ -115,9 +123,19 @@ class EmpleadoController extends Controller
         //
     }
 
-    public function lista(){
-        $empleados = DB::select('Select * from empleados order by apaterno');
-        return view('empleados.lista',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','empleados' => $empleados]);
+    public function lista(Request $request){
+
+        //$empleados = DB::select('Select * from empleados order by apaterno')->paginate();
+        $filtro = $request->name;
+        if (trim($filtro) != "" && isset($filtro)){ 
+          $empleados = empleados::where('NOMBRE_COMPLETO',"LIKE", "%$filtro%")
+                         ->orderBy('apaterno','ASC')
+                         ->paginate();
+        }else{
+          $empleados = empleados::orderBy('apaterno','ASC')
+                         ->paginate(); 
+        }
+        return view('empleados.lista',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','empleados' => $empleados,'filtro'=>$filtro]);
     }
     /**
      * Ésta sección redirige a la cuenta asignada al personal.
@@ -146,8 +164,9 @@ class EmpleadoController extends Controller
           $empleado = DB::table('empleados')
                       ->where('id','=', $cual)
                       ->first();
-          return view('empleados.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','accion'=>0,'empleado'=>$empleado]);
+          return view('empleados.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','accion'=>'0','empleado'=>$empleado]);
         }else{
+            Session::flash('message','Su cuenta no esta registrada como empleado, por lo que no tiene datos personales que modificar. Si tiene un empleado lige esta cuenta con la de un empleado.');
              return view('admin.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0']);
         }
     }
@@ -182,8 +201,8 @@ class EmpleadoController extends Controller
         // $mpdf->SetTopMargin(5);
         $mpdf->SetDisplayMode('fullpage');
         $mpdf->WriteHTML($html);
-        $mpdf->SetHTMLHeader("<div style='position: absolute; top: 20px;'><img src='/img/encabezadoofp.png' ></div>");
-        $mpdf->SetHTMLFooter("<img src='/img/pieofp.png'>");
+        //$mpdf->SetHTMLHeader("<div style='position: absolute; top: 20px;'><img src='/img/encabezadoofp.png' ></div>");
+        //$mpdf->SetHTMLFooter("<img src='/img/pieofp.png'>");
         // dd($mpdf);
         $mpdf->Output($namefile,"I");
         //return view('empleados.contrato',['Datos'=>$empleado,'PUESTODIRECTORGRAL'=>$empleado->PUESTODIRECTORGRAL,'NombDirector'=>'DR. JUAN MANUEL JIMÉNEZ HERRERA']);
@@ -194,7 +213,8 @@ class EmpleadoController extends Controller
         $empleado = DB::table('empleados')
                       ->where('id','=', $id)
                       ->first();
-        $html = view('empleados.contrato',['Datos'=>$empleado,'PUESTODIRECTORGRAL'=>$empleado->PUESTODIRECTORGRAL,'NombDirector'=>'DR. JUAN MANUEL JIMÉNEZ HERRERA'])->render();
+        $funciones = DB::Select('Select funciones from funciones where id=:Cual',[$empleado->funciones]);
+        $html = view('empleados.contrato',['Datos'=>$empleado,'PUESTODIRECTORGRAL'=>$empleado->PUESTODIRECTORGRAL,'NombDirector'=>'DR. JUAN MANUEL JIMÉNEZ HERRERA','funciones'=>$funciones[0]->funciones])->render();
         $namefile = 'contrato_'.time().'.pdf';
         $defaultConfig = (new \Mpdf\Config\ConfigVariables())->getDefaults();
         $fontDirs = $defaultConfig['fontDir'];
@@ -217,9 +237,52 @@ class EmpleadoController extends Controller
         // $mpdf->SetTopMargin(5);
         $mpdf->SetDisplayMode('fullpage');
         $mpdf->WriteHTML($html);
-        $mpdf->SetHTMLHeader("<div style='position: absolute; top: 20px;'><img src='/img/encabezadoofp.png' ></div>");
-        $mpdf->SetHTMLFooter("<img src='/img/piecontrato.png'>");
+        //$mpdf->SetHTMLHeader("<div style='position: absolute; top: 20px;'><img src='/img/encabezadoofp.png' ></div>");
+        //$mpdf->SetHTMLFooter("<div style='left: 200px;'> <img src='/img/piecontrato.png'> </div>");
         // dd($mpdf);
+        //https://mpdf.github.io/paging/using-page.html
         $mpdf->Output($namefile,"I");
     }
+
+    public function comprobantes(){
+        $cual = Auth::user()->usuario_id;
+        if (!empty($cual)){
+            $emp = DB::table('empleados')
+                          ->where('id','=', Auth::user()->usuario_id)
+                          ->first();
+            $RFC = $emp->RFC;
+            return view('empleados.comprobantes',['active'=>'0', 'subm'=>'0', 'subm2'=>'0','RFC'=>$RFC]);
+        }else{
+             Session::flash('message','Su cuenta no esta registrada como empleado, por lo que no tiene comprobantes asignados.');
+             return view('admin.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0']);
+        } 
+    }
+
+    public function expediente(){
+        $cual = Auth::user()->usuario_id;
+        if (!empty($cual)){
+            $emp = DB::table('empleados')
+                          ->where('id','=', Auth::user()->usuario_id)
+                          ->first();
+            $RFC = $emp->RFC;
+            return view('empleados.expediente',['active'=>'0', 'subm'=>'0', 'subm2'=>'0','RFC'=>$RFC]);
+        }else{
+             Session::flash('message','Su cuenta no esta registrada como empleado, por lo que no tiene comprobantes asignados.');
+             return view('admin.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0']);
+        } 
+    }
+
+    public function GuardarDOC(request $request){
+        $file = $request->file('file');
+        $path = public_path() . '\\expediente\\' . $request['RFC'];
+        $nombre = $request['name'];
+        //return $path . '\\' . $nombre;
+        //$file->move($file, $path . '\\' . $nombre);
+        storage::disk('local')->put($path.'\\'.$nombre, \File::get($file));
+        //move_uploaded_file($path . '\\' . $nombre, $file);
+
+        Session::flash('message','Imagen subida correctamente');
+        
+        return Redirect::to('/empleados/expediente');
+    } 
 }

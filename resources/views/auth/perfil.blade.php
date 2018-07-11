@@ -35,7 +35,7 @@
                     <div style="display: inline-block; padding: 0px; border: hidden; margin: 0px; ">
                       <div style="border: hidden; display: inline-block; border: none; color: white; padding: 0px 0px; text-decoration: none; margin: 4px 2px; cursor: pointer;">
 
-                       <a href="{{ route('edit',['id'=>$user->id]) }}" class="btn btn-success" >Editar</a>
+                       <a href="{{ route('usuarios.edit',['id'=>$user->id]) }}" class="btn btn-success" >Editar</a>
                       </div>
                      </div>
                   </td>

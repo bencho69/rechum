@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 
 @section('content')
+@include('alerts.request')
+@include('alerts.success')
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
