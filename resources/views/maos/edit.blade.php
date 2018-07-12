@@ -77,8 +77,33 @@
                  <label for="capacidad">Capacidad: (<code style="color:DodgerBlue;"> {{ $mao->capacidad }} </code>)</label>
                  <input type="text" class="form-control" name="capacidad" placeholder="Capacidad del MAOS." value="{{  $mao->capacidad }}">
               
-               <label for="nombre_contrato">Nombre de contrato:{{$filtro}} (<code style="color:DodgerBlue;"><?php echo $mao->nombre_contrato; ?></code>)</label>
+               <label for="nombre_contrato">Nombre de contrato: (<code style="color:DodgerBlue;"><?php echo $mao->nombre_contrato; ?></code>)</label>
                <input type="text" class="form-control" name="nombre_contrato" placeholder="Nombre del MAO para el contrato." value="<?php echo $mao->nombre_contrato; ?>">
+               <br>
+               <label for="nombre_contrato">Kilometros de Chilpancingo a este MAO: (<code style="color:DodgerBlue;"><?php echo $mao->km; ?></code>)</label>
+               <input type="text" class="form-control" name="km" placeholder="Kilometro de Chilpancingo a este MAO." value="<?php echo $mao->km; ?>">
+               <label for="nombre_contrato">Region a la que pertenece: (<code style="color:DodgerBlue;"><?php echo $mao->region; ?></code>)</label>
+               <input type="text" class="form-control" name="region" placeholder="Clave y nombre de la Region a la que pertenece." value="<?php echo $mao->region; ?>">
+               <label for="nombre_contrato">Tipo de unidad: (<code style="color:DodgerBlue;"><?php echo $mao->tipou; ?></code>)</label><br>
+               <?php if ($mao->tipou == "URBANA")  
+                        echo "<input type='radio' name='tipou' value='URBANA' checked> URBANA<br>"; 
+                     else 
+                        echo "<input type='radio' name='tipou' value='URBANA'> URBANA<br>";
+                     if ($mao->tipou == "RUTAL") echo "<input type='radio' name='tipou' value='RUTAL' checked> RUTAL<br>"; 
+                     else echo "<input type='radio' name='tipou' value='MATUTINO'> RUTAL<br>";
+                     if ($mao->tipou == "SIN DATOS") echo "<input type='radio' name='tipou' value='SIN DATOS' checked> SIN DATOS<br>" ;
+                     else echo "<input type='radio' name='tipou' value='SIN DATOS'> SIN DATOS<br>";              
+              ?> 
+              <label for="operando">En su área se emiten comprobantes fiscales? (<code style="color:DodgerBlue;">{{ $mao->operando }}</code>)? </label> <br>
+               <?php if ( $mao->comprobante =="SI")  
+                        echo "<input type='radio' name='comprobante' value='SI' checked> SI<br>"; 
+                     else 
+                        echo "<input type='radio' name='comprobante' value='SI'> SI<br>";
+                     if ($mao->comprobante == "NO") echo "<input type='radio' name='comprobante' value='NO' checked> NO<br>"; 
+                     else echo "<input type='radio' name='comprobante' value='NO'> NO<br>";
+                ?> 
+                <label for="nombre_contrato">Nombre de la Ciudad: (<code style="color:DodgerBlue;"><?php echo $mao->ciudad; ?></code>)</label>
+               <input type="text" class="form-control" name="ciudad" placeholder="Nombre de la ciudad donde se ubica este MAO." value="<?php echo $mao->ciudad; ?>">    
                <br>
                <input type="hidden" name="accion" value="1"> 
                <input type="hidden" name="filtro" value="{{$filtro}}"> 

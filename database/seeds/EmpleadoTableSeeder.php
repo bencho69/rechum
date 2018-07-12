@@ -17,6 +17,7 @@ class EmpleadoTableSeeder extends Seeder
         	DB::table('users')->Insert([
         		'name'=>$emp->NOMBRES,
         		'email'=>$emp->RFC,
+                'usuario_id'=>$emp->id,
         		'password'=>bcrypt($emp->RFC),
         		'tipo'=>'USR'
         	 ]);

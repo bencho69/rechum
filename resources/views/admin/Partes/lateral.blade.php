@@ -41,13 +41,7 @@
               @else
                 <li>
               @endif
-              <a href="/usuarios/lista"><i class="fa fa-circle-o"></i>Usuarios</a></li>
-              @if( $active==1 and $subm == 2 and $subm2 == 0)  
-                <li class="active">
-              @else
-                <li>
-              @endif    
-              <a href="/permisos"><i class="fa fa-circle-o"></i> Permisos</a></li>    
+              <a href="/usuarios/lista"><i class="fa fa-circle-o"></i>Usuarios</a></li>   
             @endif
              @if( $active==1 and $subm == 3 and $subm2 == 0)  
                 <li class="active">
@@ -79,7 +73,7 @@
                 @endif
               </ul>        
         </li>      
-        @if(Auth::user()->RECHUM == "S" and Auth::user()->PASAJES == "S")
+        @if(Auth::user()->RECHUM == "S" or Auth::user()->PASAJES == "S")
           @if( $active == 3)  
               <li class="treeview active">
             @else
@@ -92,12 +86,11 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              @if(Auth::user()->RECHUM == "S")
-                <li><a href="/maos/show"><i class="fa fa-circle-o"></i> MAOS</a></li>
-              @endif
+              <li><a href="/maos/show"><i class="fa fa-circle-o"></i> MAOS</a></li>
               @if(Auth::user()->PASAJES == "S")
-                <li><a href="/pasajes/show"><i class="fa fa-circle-o"></i> DISTANCIAS</a></li>
-                <li><a href="/pasajes/tarifas"><i class="fa fa-circle-o"></i> Tarifas</a></li>
+                <li><a href="/clues/show"><i class="fa fa-circle-o"></i> CLUES</a></li>
+                <li><a href="/municipios/show"><i class="fa fa-circle-o"></i> Municipios</a></li>
+                <li><a href="/tarifas/show"><i class="fa fa-circle-o"></i> Tarifas</a></li>
               @endif
             </ul>
           </li>
@@ -115,9 +108,9 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="/pasajes/show"><i class="fa fa-circle-o"></i> Acuerdo</a></li>
-              <li><a href="/pasajes/solicitud"><i class="fa fa-circle-o"></i> Solicitud</a></li>
-              <li><a href="/pasajes/solicitud"><i class="fa fa-circle-o"></i> Comprobaciones</a></li>
+              <li><a href="/comision/show"><i class="fa fa-circle-o"></i> Acuerdo</a></li>
+              <li><a href="/comision/solicitud"><i class="fa fa-circle-o"></i> Solicitud</a></li>
+              <li><a href="/comision/solicitud"><i class="fa fa-circle-o"></i> Comprobaciones</a></li>
             </ul>
           </li>
         @endif        

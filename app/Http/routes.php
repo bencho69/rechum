@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
    
    // Catálogo de MAOS
    Route::resource('maos','MaosController');
+   // Catálogo de Tarifas
+   Route::resource('tarifas','TarifasController');
 
    Route::get('subirAvatar', 'StorageController@subirAvatar')->name('subirAvatar');
    Route::post('temp/crearAvatar', 'StorageController@GuardarAvatar');
