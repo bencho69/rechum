@@ -1,15 +1,15 @@
 <?php
 
-namespace RecHum\Http\Controllers;
+namespace rechum\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use RecHum\Http\Requests;
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Requests;
+use rechum\Http\Controllers\Controller;
 
 use DB;
 Use Session;
-use RecHum\Tarifas;
+use rechum\Tarifas;
 
 class TarifasController extends Controller
 {
@@ -68,7 +68,6 @@ class TarifasController extends Controller
                          ->orderby('id','ASC')
                          ->paginate(); 
         }
-        $this->$filtro = $filtro;
                          //->get();   
         //$maos = DB::select('select * from maos order by no');
         return view('tarifas.index',['active'=>'3', 'subm'=>'1', 'subm2'=>'0','tarifa'=>$tarifa,'filtro'=>$filtro]);

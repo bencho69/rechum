@@ -13,7 +13,8 @@
           </h3>
           <h4>Actualiza los datos que consideres deban ser actualizados.</h4>
           
-          <form action="" method="POST" >
+          {!! Form::model($empleado, ['route'=> ['empleados.update', $empleado->id], 'method' =>'PUT']) !!} 
+            {{ csrf_field() }}
             <fieldset class="form-group">
               <div class="form-horizontal form-group col-sm-3">
                   <label for="TipoContrato">Tipo de contrato: (<code style="color:DodgerBlue;"> {{ $empleado->TipoContrato }} </code>)</label>
@@ -83,7 +84,11 @@
               </div>
               <div class="form-horizontal form-group col-sm-10">
                   <label for="ADSCRIPCION">Adscripción: ()</label>
-                  <input type="text" class="form-control" name="ADSCRIPCION" placeholder="Area de Adscripción." required>
+                  <select name="ADSCRIPCION" class="form-control" required>
+                  @foreach ($adscrip as $adsc => $ads)
+                     echo "<option value='{{$ads->id}}' selected>{{$ads->nombre_contrato}}</option>"; 
+                  @endforeach   
+                  </select>
               </div>
             </fieldset>  
             <fieldset class="form-group">
@@ -135,7 +140,15 @@
               </div>
               <div class="form-group col-sm-3">
                  <label for="ESCOLARIDAD">Escolaridad: (<code style="color:DodgerBlue;"> {{ $empleado->ESCOLARIDAD }} </code>)</label>
-                 <input type="text" class="form-control" name="ESCOLARIDAD" placeholder="Nombre de tu profesion." value="{{  $empleado->ESCOLARIDAD }}">
+                 <select name="ESCOLARIDAD" class="form-control" required>
+                  @foreach ($nivelesc as $nives => $ne)
+                     @if($ne==$empleado->ESCOLARIDAD)
+                      echo "<option value='{{$ne}}' selected>{{$ne}}</option>";  
+                     @else
+                      echo "<option value='{{$ne}}'>{{$ne}}</option>"; 
+                     @endif
+                  @endforeach   
+                  </select>
               </div>
               <div class="form-group col-sm-3">
                  <label for="ESTUDIOS">Ultimo grado de Estudios: (<code style="color:DodgerBlue;"> {{ $empleado->ESTUDIOS }} </code>)</label>
@@ -230,7 +243,7 @@
             </div>  
             </fieldset>
             <fieldset >
-              <legend>Informacíon del Banco:</legend>
+              <legend>Información del Banco:</legend>
               <div class="form-horizontal form-group col-sm-10">
                <label for="CLABE">CLABE (<code style="color:DodgerBlue;"><?php echo $empleado->CLABE; ?></code>)</label>
                <div class="form-group col-sm-10">
@@ -239,7 +252,7 @@
               </div>
             </fieldset>
             <fieldset>
-              <legend>Bitacora de cambios:</legend>
+              <legend>Bitácora de cambios:</legend>
               <div class="form-group col-sm-10">
                <div class="form-group col-sm-10">
                     <textarea name="bitacora" rows="3" cols="80">
@@ -251,6 +264,7 @@
           </div>   
             <input type="hidden" name="RFC" value="<?php echo $empleado->RFC; ?>">
             <input type="hidden" name="NOMBRE_COMPLETO" value="<?php echo $empleado->NOMBRE_COMPLETO; ?>"> 
+            <input type="hidden" name="filtro" value="{{ $filtro }}">   
             <input type="hidden" name="accion" value="1">        
             <input class="btn btn-primary" type="submit" value="Actualizar y Guardar">
           </form>  

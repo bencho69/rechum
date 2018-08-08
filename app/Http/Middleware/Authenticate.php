@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Http\Middleware;
+namespace rechum\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;

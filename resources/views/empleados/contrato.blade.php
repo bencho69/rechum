@@ -7,19 +7,20 @@
   <style>
   .relative {  position: relative; width: 400px; height: 200px;  border: 3px solid #73AD21; } 
   .absolute {  position: absolute; top: 120px;   left: 200px;    right: 200px;  width: 250px;  height: 30px;  border: 3px solid #73AD21; }
-  p { text-align:justify;  text-justify: inter-word;  margin: 10px 0 10px 0;}
+  p { text-align:justify;  text-justify: inter-word;  margin: 10px 0 10px 0; font-family: arial;}
   .clausula {   font-size:7.0pt;   text-align:justify;   text-justify: inter-word;   line-height: 0.97;}
   .declaracion {   font-size:6.5pt;   text-align:justify;     text-justify: inter-word;   line-height: 0.95;   margin-left: 18.0pt; }
   .obligaciones {    font-size:7.0pt;   text-align:justify;     text-justify: inter-word;   line-height: 0.95;   margin-left:20.8pt;}
   .subrayado{  text-decoration-line: underline;}
-  @page { size: auto;   odd-header-name: html_myHeader;   odd-footer-name: html_myFooter;  margin-top: 2.2cm;  margin-bottom: 1.5cm;  margin-footer: 5mm; margin-left: 5mm;   margin-right: 5mm; }
+  #encabezado{position: absolute; top: -5px;}
+  @page { size: auto;   odd-header-name: html_myHeader;   odd-footer-name: html_myFooter;  margin-top: 2.4cm;  margin-bottom: 1.5cm;  margin-footer: 5mm; margin-left: 5mm;   margin-right: 5mm; }
   </style>
 </head>
 	<body >
-    <htmlpageheader name="myHeader" style="display:none">
-        <div style='position: absolute; top: 10px;'><img src='/img/encabezadoofp.png' ></div>
+    <htmlpageheader name="myHeader">
+        <div ><img height="50x;" width="100%" src='/img/encabezadoofp.png' ></div>
     </htmlpageheader>
-    <htmlpagefooter name="myFooter" style="display:none">
+    <htmlpagefooter name="myFooter" >
         <table width="100%">
             <tr><td align="center"><img src='/img/piecontrato.png'></td></tr>
             <tr>
@@ -29,8 +30,8 @@
     </htmlpagefooter>    
 		<!-- Site wrapper -->
     
-    <div style='position: absolute; top: 75px;left: 650px'><img src='/img/fotocontrato.png' ></div>
-    <div style="position: absolute; top: 75px;left: 130px;right: 200px;width: 250px;height: 25px;border: 3px solid #000000;text-align: center; color:red;">{{$Datos->FOLIO}}</div>
+    <div style='position: absolute; top: 85px;left: 650px'><img src='/img/fotocontrato.png' ></div>
+    <div style="position: absolute; top: 85px;left: 130px;right: 200px;width: 250px;height: 25px;border: 3px solid #000000;text-align: center; color:red;">{{$Datos->FOLIO}}</div>
 		<div class="wrapper">
 
 <div >

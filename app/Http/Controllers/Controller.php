@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Http\Controllers;
+namespace rechum\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

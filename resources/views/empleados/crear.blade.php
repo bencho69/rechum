@@ -59,7 +59,11 @@
               </div>
               <div class="form-horizontal form-group col-sm-10">
                   <label for="ADSCRIPCION">Adscripción: ()</label>
-                  <input type="text" class="form-control" name="ADSCRIPCION" placeholder="Area de Adscripción." required>
+                  <select name="ADSCRIPCION" class="form-control" required>
+                  @foreach ($adscrip as $adsc => $ads)
+                     echo "<option value='{{$ads->id}}' selected>{{$ads->nombre_contrato}}</option>"; 
+                  @endforeach   
+                  </select>
               </div>
             </fieldset>  
             <fieldset class="form-group">

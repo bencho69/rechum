@@ -72,7 +72,7 @@
               <div class="form-horizontal form-group col-sm-12">
               <legend>Informacíon Adicional :</legend>
                 <div class="form-group col-sm-12">
-                     <label for="nombre">Observaciones del destino: (<code style="color:DodgerBlue;"> Indique las Observaciones de ésta tarifa. </code>)</label>
+                     <label for="ciudad">Observaciones del destino: (<code style="color:DodgerBlue;"> Indique las Observaciones de ésta tarifa. </code>)</label>
                      
                      <textarea class="form-control" rows="5" id="ciudad" name="ciudad">{{  $tarifa->ciudad }}</textarea>
                 </div> 

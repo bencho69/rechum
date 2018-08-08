@@ -9,7 +9,7 @@
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
-      <!-- search form -->
+      <!-- search form
       <form action="#" method="get" class="sidebar-form">
         <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Buscar...">
@@ -19,7 +19,7 @@
               </span>
         </div>
       </form>
-      <!-- /.search form -->
+       /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU PRINCIPAL</li>
@@ -89,6 +89,7 @@
               <li><a href="/maos/show"><i class="fa fa-circle-o"></i> MAOS</a></li>
               @if(Auth::user()->PASAJES == "S")
                 <li><a href="/clues/show"><i class="fa fa-circle-o"></i> CLUES</a></li>
+                <li><a href="/estados/show"><i class="fa fa-circle-o"></i> Estados</a></li>
                 <li><a href="/municipios/show"><i class="fa fa-circle-o"></i> Municipios</a></li>
                 <li><a href="/tarifas/show"><i class="fa fa-circle-o"></i> Tarifas</a></li>
               @endif
@@ -108,7 +109,7 @@
               </span>
             </a>
             <ul class="treeview-menu">
-              <li><a href="/comision/show"><i class="fa fa-circle-o"></i> Acuerdo</a></li>
+              <li><a href="/comision"><i class="fa fa-circle-o"></i> Acuerdo</a></li>
               <li><a href="/comision/solicitud"><i class="fa fa-circle-o"></i> Solicitud</a></li>
               <li><a href="/comision/solicitud"><i class="fa fa-circle-o"></i> Comprobaciones</a></li>
             </ul>

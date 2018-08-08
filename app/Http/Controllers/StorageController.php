@@ -1,17 +1,19 @@
 <?php
 
-namespace RecHum\Http\Controllers;
+namespace rechum\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use RecHum\Http\Requests;
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Requests;
+use rechum\Http\Controllers\Controller;
 
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-use RecHum\User;
+use rechum\User;
+use rechum\estados;
+use rechum\municipios;
 use Session;
 
 class StorageController extends Controller
@@ -33,7 +35,7 @@ class StorageController extends Controller
         $edo->imagen = $contents;
         $edo->save();
 
-        Session::flash('message','Imagen del avatar subida correctamente');
+        Session::flash('message','Imagen del estado subida correctamente');
 
         $edos = estados::paginate(5);
         
@@ -44,7 +46,7 @@ class StorageController extends Controller
 
         $id=$request['id'];
 
-        return view('mpos.subirmpo',['id'=>$id,'active'=>'2','subm'=>'2','subm2'=>'2']);
+        return view('municipios.subirmpo',['id'=>$id,'active'=>'2','subm'=>'2','subm2'=>'2']);
     }
 
     public function GuardarMPO(request $request){
@@ -61,7 +63,7 @@ class StorageController extends Controller
 
         $mpos = municipios::paginate(5);
         
-        return view('mpos.index',['mpos'=>$mpos, 'active'=>'2','subm'=>'2','subm2'=>'2']);
+        return view('municipios.index',['mpos'=>$mpos, 'active'=>'2','subm'=>'2','subm2'=>'2']);
     }   
 
     public function subirAvatar(request $request){

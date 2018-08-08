@@ -78,7 +78,9 @@
 <script src="/admin/js/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="/admin/js/adminlte.min.js"></script>
-
+<!-- Database js -->
+<script src="/admin/js/datatables.min.js"></script>
+@yield('js')
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()

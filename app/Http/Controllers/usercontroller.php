@@ -1,15 +1,15 @@
 <?php
 
-namespace RecHum\Http\Controllers;
+namespace rechum\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use RecHum\Http\Requests;
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Requests;
+use rechum\Http\Controllers\Controller;
 
 use Closure;
 Use Session;
-Use RecHum\User;
+Use rechum\User;
 Use DB;
 use Auth;
 
@@ -22,11 +22,6 @@ class usercontroller extends Controller
         $this->middleware('admin',['only'=>['create','show','destroy']]);
     
         $this->Indice =3;
-
-        $active = 1;
-        $subm  = 0;
-        $subm2 =0;
-        $filtro = '';
     }
     
     /**

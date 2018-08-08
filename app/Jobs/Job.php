@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Jobs;
+namespace rechum\Jobs;
 
 use Illuminate\Bus\Queueable;
 

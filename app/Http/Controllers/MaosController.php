@@ -1,14 +1,14 @@
 <?php
 
-namespace RecHum\Http\Controllers;
+namespace rechum\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use RecHum\Http\Requests;
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Requests;
+use rechum\Http\Controllers\Controller;
 
 use DB;
-use RecHum\Maos;
+use rechum\Maos;
 Use Session;
 
 class MaosController extends Controller
@@ -69,7 +69,6 @@ class MaosController extends Controller
                          ->orderby('no','ASC')
                          ->paginate(); 
         }
-        $this->$filtro = $filtro;
                          //->get();   
         //$maos = DB::select('select * from maos order by no');
         return view('maos.index',['active'=>'3', 'subm'=>'1', 'subm2'=>'0','maos'=>$maos,'filtro'=>$filtro]);
@@ -105,16 +104,16 @@ class MaosController extends Controller
         //            ->where('id',"=", "$id")
         //            ->get();
 
-        $usr = Maos::find($id);
-        $usr->clave = $request['clave'];
-        $usr->nombre = $request['nombre'];
-        $usr->tipom = $request['tipom']; 
-        $usr->operando = $request['operando'];
-        $usr->areainfluencia = $request['areainfluencia'];
-        $usr->capacidad = $request['capacidad'];
-        $usr->turno = $request['turno'];
-        $usr->nombre_contrato = $request['nombre_contrato'];
-        $usr->save();
+        $mao = Maos::find($id);
+        $mao->clave = $request['clave'];
+        $mao->nombre = $request['nombre'];
+        $mao->tipom = $request['tipom']; 
+        $mao->operando = $request['operando'];
+        $mao->areainfluencia = $request['areainfluencia'];
+        $mao->capacidad = $request['capacidad'];
+        $mao->turno = $request['turno'];
+        $mao->nombre_contrato = $request['nombre_contrato'];
+        $mao->save();
 
         Session::flash('message','Usuario Guardado correctamente.');
         $filtro = $request['filtro'];

@@ -1,11 +1,11 @@
 <?php
 
-namespace RecHum\Http\Controllers;
+namespace rechum\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use RecHum\Http\Requests;
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Requests;
+use rechum\Http\Controllers\Controller;
 
 class empleadoRFCController extends Controller
 {

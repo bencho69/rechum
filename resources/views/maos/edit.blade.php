@@ -89,8 +89,8 @@
                         echo "<input type='radio' name='tipou' value='URBANA' checked> URBANA<br>"; 
                      else 
                         echo "<input type='radio' name='tipou' value='URBANA'> URBANA<br>";
-                     if ($mao->tipou == "RUTAL") echo "<input type='radio' name='tipou' value='RUTAL' checked> RUTAL<br>"; 
-                     else echo "<input type='radio' name='tipou' value='MATUTINO'> RUTAL<br>";
+                     if ($mao->tipou == "RURAL") echo "<input type='radio' name='tipou' value='RURAL' checked> RURAL<br>"; 
+                     else echo "<input type='radio' name='tipou' value='RURAL'> RURAL<br>";
                      if ($mao->tipou == "SIN DATOS") echo "<input type='radio' name='tipou' value='SIN DATOS' checked> SIN DATOS<br>" ;
                      else echo "<input type='radio' name='tipou' value='SIN DATOS'> SIN DATOS<br>";              
               ?> 

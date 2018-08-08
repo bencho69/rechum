@@ -9,20 +9,23 @@
         size: auto;
         odd-header-name: html_myHeader;
         odd-footer-name: html_myFooter;
-        margin-top: 2.2cm;
+        margin-top: 2.0cm;
         margin-bottom: 1.5cm;
         margin-footer: 5mm;
         margin-left: 25mm;
         margin-right: 20mm;
     }
+    p {
+      font-family: arial;
+    }
   </style>  
 </head>  
     
 	<body class="hold-transition skin-blue sidebar-mini">
-    <htmlpageheader name="myHeader" style="display:none">
-        <div style='position: absolute; top: 20px;left: 40px;'><img src='/img/encabezadoofp.png' ></div>
+    <htmlpageheader name="myHeader" >
+        <div style='top: 40px;left: 40px;'><img src='/img/encabezadoofp.png' ></div>
     </htmlpageheader>
-    <htmlpagefooter name="myFooter" style="display:none">
+    <htmlpagefooter name="myFooter" >
         <table width="100%">
             <tr><td align="center"><div style='position: absolute; top:93%;left: 40px;width: 90%'><img src='/img/pieofp.png'></div></td></tr>
         </table>

@@ -1,14 +1,14 @@
 <?php
 
-namespace RecHum\Http\Controllers;
+namespace rechum\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use RecHum\Http\Requests;
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Requests;
+use rechum\Http\Controllers\Controller;
 
 use DB;
-use RecHum\clues;
+use rechum\clues;
 Use Session;
 
 class CLUESController extends Controller
@@ -59,20 +59,28 @@ class CLUESController extends Controller
     public function show($id, Request $request)
     {
         $filtro = $request->name;
+        $filtroL = $request->localidad;
         if (trim($filtro) != "" && isset($filtro)){ 
-          $tarifa = DB::table('clues')
+          $clues = DB::table('clues')
                       ->where('nombreu',"LIKE", "%$filtro%")
                          ->orderBy('id','ASC')
                          ->paginate();
         }else{
-          $tarifa = DB::table('clues')
-                         ->orderby('id','ASC')
-                         ->paginate(); 
-        }
-        $this->$filtro = $filtro;
+             
+            if (trim($filtroL) != "" && isset($filtroL)){ 
+              $clues = DB::table('clues')
+                          ->where('localidad',"LIKE", "%$filtroL%")
+                             ->orderBy('id','ASC')
+                             ->paginate();
+            }else{
+              $clues = DB::table('clues')
+                             ->orderby('id','ASC')
+                             ->paginate(); 
+            }
+        } 
                          //->get();   
         //$maos = DB::select('select * from maos order by no');
-        return view('clues.index',['active'=>'3', 'subm'=>'1', 'subm2'=>'0','clues'=>$tarifa,'filtro'=>$filtro]);
+        return view('clues.index',['active'=>'3', 'subm'=>'1', 'subm2'=>'0','clues'=>$clues,'filtro'=>$filtro,'filtroL'=>$filtroL]);
     }
 
     /**
@@ -81,15 +89,16 @@ class CLUESController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
         //return "Estoy en el EDIT";
-        $tarifa = DB::table('tarifas')
+        $clues = DB::table('clues')
                     ->where('id',"=", "$id")
                     ->get();
         $filtro = $request['filtro'];
+        $filtroL = $request['filtroL'];
         //$maos = DB::select('select * from maos where id = :cual order by no',['cual','=',$id]);
-        return view('clues.edit',['active'=>'3', 'subm'=>'1', 'subm2'=>'0','tarifa'=>$tarifa[0],'filtro'=>$filtro]);
+        return view('clues.edit',['active'=>'3', 'subm'=>'1', 'subm2'=>'0','clues'=>$clues[0],'filtro'=>$filtro, 'filtroL'=>$filtroL]);
     }
 
     /**
@@ -101,7 +110,40 @@ class CLUESController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $clues = clues::find($id);
+        $clues->CLUES = $request['CLUES'];
+        $clues->nombreu = $request['nombreu'];
+        $clues->localidad = $request['localidad'];
+        $clues->km = $request['km'];
+        $clues->municipio = $request['municipio'];
+        $clues->region = $request['region'];
+        $clues->tipou = $request['tipou'];
+        $clues->compfis = $request['compfis'];
+        $clues->save();
+
+        Session::flash('message','CLUES Guardado correctamente.');
+        $filtro = $request['filtro'];
+        $filtroL = $request['filtroL'];
+        if (trim($filtro) != "" && isset($filtro)){ 
+          $clues = DB::table('clues')
+                      ->where('nombreu',"LIKE", "%$filtro%")
+                         ->orderBy('id','ASC')
+                         ->paginate();
+        }else{
+          if (trim($filtroL) != "" && isset($filtroL)){ 
+              $clues = DB::table('clues')
+                          ->where('localidad',"LIKE", "%$filtroL%")
+                             ->orderBy('id','ASC')
+                             ->paginate();
+            }else{
+              $clues = DB::table('clues')
+                             ->orderby('id','ASC')
+                             ->paginate(); 
+            }
+        }
+                         //->get();   
+       
+        return view('clues.index',['active'=>'3', 'subm'=>'1', 'subm2'=>'0','clues'=>$clues,'filtro'=>$filtro,'filtroL'=>$filtroL]);
     }
 
     /**

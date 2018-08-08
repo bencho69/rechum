@@ -1,8 +1,8 @@
 <?php
 
-namespace RecHum\Http\Requests;
+namespace rechum\Http\Requests;
 
-use RecHum\Http\Requests\Request;
+use rechum\Http\Requests\Request;
 
 class LoginRequest extends Request
 {

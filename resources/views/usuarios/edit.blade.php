@@ -26,32 +26,42 @@
             <div class="form-group">
                <label class="control-label col-sm-2">Tipo usario:</label>
                <div class="col-sm-10">
-                  @if( $user->tipo == "USR" )
-                     <input type="radio" name="tipo" value="ADMIN"> Administrador <br>
-                     <input type="radio" name="tipo" value="USR" value="{{$user->tipo}}" checked> Usuario estandar
+                  @if( $user->tipo == "USR" )  
+                     <div class="radio radio-inline">
+                      <label>
+                     <input type="radio" name="tipo" value="ADMIN" class="radio radio-inline"> Administrador <br>
+                     </label>
+                     </div>
+                     <div class="radio radio-inline">
+                      <label><input type="radio" name="tipo" value="USR" class="radio radio-inline" value="{{$user->tipo}}" checked> Usuario estandar </label>
+                     </div>
                   @else
-                     <input type="radio" name="tipo" value="ADMIN" value="{{$user->tipo}}" checked> Administrador <br>
-                     <input type="radio" name="tipo" value="USR"> Usuario estandar
+                     <div class="radio radio-inline"><label ><input type="radio" name="tipo" value="ADMIN" value="{{$user->tipo}}" class="radio radio-inline" checked> Administrador <br></label></div>
+                     <div class="radio radio-inline"><label><input type="radio" name="tipo" value="USR" class="radio radio-inline"> Usuario estandar</label></div>
                   @endif
                </div>
                <label class="control-label col-sm-2">Permiso Modulo RecHum:</label>
                <div class="col-sm-10">
                   @if( $user->RECHUM == "N" )
-                     <input type="radio" name="RECHUM" value="S"> SI <br>
-                     <input type="radio" name="RECHUM" value="N" value="{{$user->RECHUM}}" checked>NO
+                     <div class="radio radio-inline">
+                     <label ><input type="radio" name="RECHUM" value="S"> SI <br></label>
+                     </div>
+                     <div class="radio radio-inline">
+                       <label><input type="radio" name="RECHUM" value="N" value="{{$user->RECHUM}}" checked>NO</label>
+                     </div>
                   @else
-                     <input type="radio" name="RECHUM" value="S" value="{{$user->RECHUM}}" checked> SI <br>
-                     <input type="radio" name="RECHUM" value="N"> NO
+                     <div class="radio radio-inline"><label><input type="radio" name="RECHUM" value="S" value="{{$user->RECHUM}}" checked> SI <br></label></div>
+                     <div class="radio radio-inline"><label><input type="radio" name="RECHUM" value="N"> NO</label></div>
                   @endif
                </div>
-               <label class="control-label col-sm-2">Permiso Modulo Pasajes:</label>
+               <label class="control-label col-sm-2">Permiso Modulo Visticos:</label>
                <div class="col-sm-10">
                   @if( $user->PASAJES == "N" )
-                     <input type="radio" name="PASAJES" value="S"> SI <br>
-                     <input type="radio" name="PASAJES" value="N" value="{{$user->PASAJES}}" checked>NO
+                     <div class="radio radio-inline"><label><input type="radio" name="PASAJES" value="S"> SI <br></label></div>
+                     <div class="radio radio-inline"><label><input type="radio" name="PASAJES" value="N" value="{{$user->PASAJES}}" checked>NO</label></div>
                   @else
-                     <input type="radio" name="PASAJES" value="S" value="{{$user->PASAJES}}" checked> SI <br>
-                     <input type="radio" name="PASAJES" value="N"> NO
+                     <div class="radio radio-inline"><label><input type="radio" name="PASAJES" value="S" value="{{$user->PASAJES}}" checked> SI <br></label></div>
+                     <div class="radio radio-inline"><label><input type="radio" name="PASAJES" value="N"> NO</label></div>
                   @endif
                </div>
            </div>

@@ -19,11 +19,12 @@
 Route::post('ingresoRFC', 'empleadoRFCController@RFC');
 
 Route::get('registro', function () { return view('registro');  });
+Route::get('auth/login', function() {return redirect()->to('/log');  });
 
 Route::get('/', function () {    return view('welcome'); });
 
-Route::resource('log','LogController');
 Route::get('logout','LogController@logout')->name('logout');
+Route::resource('log','LogController');
 
 Route::get('password/email','Auth\PasswordController@getEmail');
 Route::post('password/email','Auth\PasswordController@postEmail');
@@ -35,8 +36,14 @@ Route::group(['middleware' => 'auth'], function () {
    
    Route::get('perfil', 'FrontController@perfil')->name('perfil');
    Route::get('download/{file}','FrontController@download')->name('download');
+   Route::get('downloadArch/{file}','FrontController@downloadArch')->name('downloadArch');
    // Authentication routes...
    Route::resource('usuarios', 'usercontroller');
+   //Controlador para subir archivos.
+   Route::get('subirarch', 'estadosController@subirarch')->name('subirarch');
+   //Controlador para subir imagen del municipio.
+   Route::get('subirmpo', 'MunicipiosController@subirmpo')->name('subirmpo');
+
 
    Route::get('admin', function()
    {
@@ -50,7 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
    Route::get('empleados/contrato/{id}','EmpleadoController@contrato')->name('empleados.contrato');
    Route::get('empleados/expediente','EmpleadoController@expediente')->name('empleados.expediente');
    Route::get('empleados/GuardarDOC','EmpleadoController@GuardarDOC')->name('empleados.GuardarDOC');
-   Route::put('empleados/GuardarDOC','EmpleadoController@GuardarDOC')->name('empleados.GuardarDOC');
+   Route::post('empleados/GuardarDOC','EmpleadoController@GuardarDOC')->name('empleados.GuardarDOC');
    Route::get('empleados/comprobantes','EmpleadoController@comprobantes')->name('empleados.comprobantes');
    
    Route::resource('empleados','EmpleadoController');
@@ -59,8 +66,19 @@ Route::group(['middleware' => 'auth'], function () {
    Route::resource('maos','MaosController');
    // Catálogo de Tarifas
    Route::resource('tarifas','TarifasController');
+   // Catálogo de CLUES
+   Route::resource('clues','CLUESController');
+   // Catálogo de municipios
+   Route::resource('municipios','MunicipiosController');
+   // Catálogo de estados
+   Route::resource('estados','estadosController');
+   // Comisiones
+   Route::resource('comision','comisionController');
 
    Route::get('subirAvatar', 'StorageController@subirAvatar')->name('subirAvatar');
+
+   Route::post('temp/crear', 'StorageController@GuardarArch');
    Route::post('temp/crearAvatar', 'StorageController@GuardarAvatar');
+   Route::post('temp/crearMPO', 'StorageController@GuardarMPO');
 
 });
