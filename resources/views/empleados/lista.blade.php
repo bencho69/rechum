@@ -1,6 +1,16 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="panel-body">
+
+    {!! Form::open(['route' => 'empleados.lista', 'method' => 'GET', 'class'=> 'navbar-form navbar-left']) !!}
+    <div class="form-group">
+      Nombre:
+      {!! Form::text('name',$filtro, ['class' => 'form-control','placeholder'=>'Nombre del usuario']) !!}
+    </div>
+    <button type="submit" class="btn btn-default">Buscar</button>
+    {!! Form::close() !!}
+</div>
     <section id="info">
     </section>  
     <section id="blog"> 
@@ -28,6 +38,7 @@
       </td></tr>
     @endforeach 
     
+    {!! $empleados->render() !!}
   </table> 
   
 @endsection

@@ -1,6 +1,16 @@
 @extends('layouts.admin')
 
 @section('content')
+<div class="panel-body">
+
+    {!! Form::open(['route' => 'usuarios.show', 'method' => 'GET', 'class'=> 'navbar-form navbar-left']) !!}
+    <div class="form-group">
+      Nombre:
+      {!! Form::text('filtro',$filtro, ['class' => 'form-control','placeholder'=>'Nombre del usuario']) !!}
+    </div>
+    <button type="submit" class="btn btn-default">Buscar</button>
+    {!! Form::close() !!}
+</div>
   <section class="content">
     @include('alerts.success')
       <!-- Default box -->
@@ -40,9 +50,9 @@
                 <div style="display: inline-block; padding: 0px; border: hidden; margin: 0px; ">
                   <div style="border: hidden; display: inline-block; border: none; color: white; padding: 0px 0px; text-decoration: none; margin: 4px 2px; cursor: pointer;">
 
-                   <a href="{{ route('usuarios.edit',['id'=>$usr->id]) }}" class="btn btn-success" >Editar</a>
+                   <a href="{{ route('usuarios.edit',['id'=>$usr->id,'filtro'=>$filtro]) }}" class="btn btn-success" >Editar</a>
                   </div>
-                  @if(Auth::user()->tipo == "ADMIN")
+                  @if(Auth::user()->tipo == "ADMIN") 
                   <!-- Boton Borrar -->
                   <div style="padding-left: 5px; border: hidden; display: inline-block; ">
                     {!!Form::open(['route'=>['usuarios.destroy',$usr->id],'method'=>'DELETE'])!!}

@@ -41,13 +41,13 @@
               @else
                 <li>
               @endif
-              <a href="/usuarios/lista"><i class="fa fa-circle-o"></i>Usuarios</a></li>
-              @endif
-              @if( $active==1 and $subm == 2 and $subm2 == 0)  
+              <a href="/usuarios/lista"><i class="fa fa-circle-o"></i>Usuarios</a></li>   
+            @endif
+             @if( $active==1 and $subm == 3 and $subm2 == 0)  
                 <li class="active">
               @else
                 <li>
-            @endif
+              @endif    
             <a href="/perfil"><i class="fa fa-circle-o"></i> Perfil</a></li>
           </ul>
         </li>
@@ -64,120 +64,66 @@
             </span>
           </a>
               <ul class="treeview-menu">  
-                @if(Auth::user()->tipo == "ADMIN")
+                @if(Auth::user()->RECHUM == "S")
                 <li>  <a href="/empleados/lista"><i class="fa fa-circle-o"></i>Lista Empleados</a>  </li>
                 @endif
                 <li>  <a href="/empleados/personal"><i class="fa fa-circle-o"></i>Datos Personales</a>  </li>
-                @if(Auth::user()->tipo == "ADMIN")
+                @if(Auth::user()->RECHUM == "S")
                 <li>  <a href="/empleados/create"><i class="fa fa-circle-o"></i>Crear nuevo    </a>  </li>
                 @endif
               </ul>        
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Charts</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-laptop"></i>
-            <span>UI Elements</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i> General</a></li>
-            <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i> Icons</a></li>
-            <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i> Buttons</a></li>
-            <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i> Sliders</a></li>
-            <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i> Timeline</a></li>
-            <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i> Modals</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-edit"></i> <span>Forms</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-            <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-            <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-          </ul>
-        </li>
+        </li>      
+        @if(Auth::user()->RECHUM == "S" or Auth::user()->PASAJES == "S")
+          @if( $active == 3)  
+              <li class="treeview active">
+            @else
+              <li class="treeview">  
+            @endif
+            <a href="#">
+              <i class="fa fa-folder"></i> <span>Catálogo</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/maos/show"><i class="fa fa-circle-o"></i> MAOS</a></li>
+              @if(Auth::user()->PASAJES == "S")
+                <li><a href="/clues/show"><i class="fa fa-circle-o"></i> CLUES</a></li>
+                <li><a href="/municipios/show"><i class="fa fa-circle-o"></i> Municipios</a></li>
+                <li><a href="/tarifas/show"><i class="fa fa-circle-o"></i> Tarifas</a></li>
+              @endif
+            </ul>
+          </li>
+        @endif
+        @if(Auth::user()->PASAJES == "S")
+          @if( $active == 4)  
+              <li class="treeview active">
+            @else
+              <li class="treeview">  
+            @endif
+            <a href="#">
+              <i class="fa fa-folder"></i> <span>Comisiones</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
+            </a>
+            <ul class="treeview-menu">
+              <li><a href="/comision/show"><i class="fa fa-circle-o"></i> Acuerdo</a></li>
+              <li><a href="/comision/solicitud"><i class="fa fa-circle-o"></i> Solicitud</a></li>
+              <li><a href="/comision/solicitud"><i class="fa fa-circle-o"></i> Comprobaciones</a></li>
+            </ul>
+          </li>
+        @endif        
         <li class="treeview {$activo}">
           <a href="#">
-            <i class="fa fa-folder"></i> <span>Peticiones</span>
+            <i class="fa fa-folder"></i> <span>Expediente</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
-            <li><a href="profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
-            <li><a href="lockscreen.html"><i class="fa fa-circle-o"></i> Lockscreen</a></li>
-            <li><a href="404.html"><i class="fa fa-circle-o"></i> 404 Error</a></li>
-            <li><a href="500.html"><i class="fa fa-circle-o"></i> 500 Error</a></li>
-            <li class="active"><a href="blank.html"><i class="fa fa-circle-o"></i> Actuales</a></li>
-            <li><a href="pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
-          </ul>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            <li class="treeview">
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li class="treeview">
-                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+            <li><a href="/empleados/expediente"><i class="fa fa-circle-o"></i> Personal</a></li>
+            <li><a href="/empleados/comprobantes"><i class="fa fa-circle-o"></i> Comprobantes</a></li>
           </ul>
         </li>
         <li class="header">ACCIONES</li>

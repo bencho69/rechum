@@ -18,7 +18,7 @@
             </thead>
                 <tbody>
 
-                  <td>{!!$user->name!!}</td>
+                  <td>{{$user->name }}</td>
                   <td>{{$user->email}}</td>
                   <td>
                     @if(!empty($user->imagen))
@@ -40,7 +40,6 @@
                      </div>
                   </td>
                 </tbody>
-
           </table>
         </div>
       </div>
@@ -51,7 +50,7 @@
   <section class="content-header">
       <h1>
         Cambie su perfil
-        <small>Utilice esta sección para modificar su perfil.</small>
+        <small>Utilice ésta sección para modificar su perfil.</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i>Admin</a></li>

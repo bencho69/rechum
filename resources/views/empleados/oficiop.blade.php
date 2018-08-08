@@ -4,10 +4,31 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>RH | Admon Recursos H</title>
-</head>
+  <style>
+    @page {
+        size: auto;
+        odd-header-name: html_myHeader;
+        odd-footer-name: html_myFooter;
+        margin-top: 2.2cm;
+        margin-bottom: 1.5cm;
+        margin-footer: 5mm;
+        margin-left: 25mm;
+        margin-right: 20mm;
+    }
+  </style>  
+</head>  
+    
 	<body class="hold-transition skin-blue sidebar-mini">
+    <htmlpageheader name="myHeader" style="display:none">
+        <div style='position: absolute; top: 20px;left: 40px;'><img src='/img/encabezadoofp.png' ></div>
+    </htmlpageheader>
+    <htmlpagefooter name="myFooter" style="display:none">
+        <table width="100%">
+            <tr><td align="center"><div style='position: absolute; top:93%;left: 40px;width: 90%'><img src='/img/pieofp.png'></div></td></tr>
+        </table>
+    </htmlpagefooter>   
 		<!-- Site wrapper -->
-    <div style="position: absolute; top: 20px;"><img src="/img/encabezadoofp.png" ></div>
+    
 		<div class="wrapper">
 
   <div><p>&nbsp;</p></div>
@@ -49,7 +70,7 @@
 
 <p style='text-align:right;font-size:10.0pt'><span>Chilpancingo, Gro., </span><span>{{$Datos->FECHAOFICIO}}.</span></p>
 <p  align=right style='text-align:right;'><span>&nbsp;</span></p>
-<p><b><span>C.{{$Datos->NOMBRE_COMPLETO}}.<br>
+<p><b><span>C. {{$Datos->NOMBRE_COMPLETO}}<br>
 P R E S E N T E.</span></b></p>
 <p><b><span>&nbsp;</span></b></p>
 <p style='margin-right:.05pt;text-align:justify;font-size:11.0pt;'><span>Me permito informarle

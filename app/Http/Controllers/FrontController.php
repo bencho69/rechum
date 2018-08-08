@@ -9,6 +9,7 @@ use RecHum\Http\Controllers\Controller;
 
 use RecHum\User;
 use Auth;
+use DB;
 
 class FrontController extends Controller
 {
@@ -30,5 +31,15 @@ class FrontController extends Controller
         $user = User::find(Auth::user()->id);
  
         return view('auth.perfil',['user'=>$user, 'active'=>'1','subm'=>'2','subm2'=>'0']);
+    }
+
+    public function download($file){
+
+        $emp = DB::table('empleados')
+                      ->where('id','=', Auth::user()->usuario_id)
+                      ->first();
+        $RFC = $emp->RFC;
+      $pathtoFile = public_path() . '/comprobantes/' . $RFC . '/' . $file;
+      return response()->download($pathtoFile);
     }
 }

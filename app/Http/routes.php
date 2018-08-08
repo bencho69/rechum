@@ -34,19 +34,31 @@ Route::post('password/reset','Auth\PasswordController@postReset');
 Route::group(['middleware' => 'auth'], function () {
    
    Route::get('perfil', 'FrontController@perfil')->name('perfil');
+   Route::get('download/{file}','FrontController@download')->name('download');
    // Authentication routes...
-   Route::resource('usuarios', 'userController');
+   Route::resource('usuarios', 'usercontroller');
 
    Route::get('admin', function()
    {
    	 return view('admin.index',['active'=>'0', 'subm'=>'0', 'subm2'=>'0']);
    });
-   Route::get('empleados/lista','EmpleadoController@lista');
+   
    Route::get('empleados/personal','EmpleadoController@datosper');
-   Route::get('empleados/editarall','EmpleadoController@editarall');
+   Route::get('empleados/lista','EmpleadoController@lista')->name('empleados.lista');
+   Route::get('empleados/editarall','EmpleadoController@editarall')->name('empleados.editarall');
    Route::get('empleados/oficiop/{id}','EmpleadoController@oficiop')->name('empleados.oficiop');
    Route::get('empleados/contrato/{id}','EmpleadoController@contrato')->name('empleados.contrato');
+   Route::get('empleados/expediente','EmpleadoController@expediente')->name('empleados.expediente');
+   Route::get('empleados/GuardarDOC','EmpleadoController@GuardarDOC')->name('empleados.GuardarDOC');
+   Route::put('empleados/GuardarDOC','EmpleadoController@GuardarDOC')->name('empleados.GuardarDOC');
+   Route::get('empleados/comprobantes','EmpleadoController@comprobantes')->name('empleados.comprobantes');
+   
    Route::resource('empleados','EmpleadoController');
+   
+   // Catálogo de MAOS
+   Route::resource('maos','MaosController');
+   // Catálogo de Tarifas
+   Route::resource('tarifas','TarifasController');
 
    Route::get('subirAvatar', 'StorageController@subirAvatar')->name('subirAvatar');
    Route::post('temp/crearAvatar', 'StorageController@GuardarAvatar');

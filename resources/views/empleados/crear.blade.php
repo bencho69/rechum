@@ -51,7 +51,6 @@
               </div>
               <div class="form-horizontal form-group col-sm-10">
                   <label for="PUESTO">Puesto: ()</label>
-                  <input type="text" class="form-control" name="PUESTO" placeholder="Puesto a laborar." required>
                   <select name="PUESTO" class="form-control" required>
                   @foreach ( $puestos as $puesto)
                      <option value='{{$puesto->puesto}}'>{{$puesto->puesto}}</option>  

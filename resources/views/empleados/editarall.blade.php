@@ -18,7 +18,7 @@
               <div class="form-horizontal form-group col-sm-3">
                   <label for="TipoContrato">Tipo de contrato: (<code style="color:DodgerBlue;"> {{ $empleado->TipoContrato }} </code>)</label>
                   <select name="TipoContrato" class="form-control">
-                <?php if ( $empleado->TipoContrato == "CONFIANZA")
+                  <?php if ( $empleado->TipoContrato == "CONFIANZA")
                         echo "<option value='CONFIANZA' selected>Confianza</option>"; 
                       else 
                         echo "<option value='CONFIANZA'>Confianza</option>";
@@ -75,7 +75,11 @@
               </div>
               <div class="form-horizontal form-group col-sm-10">
                   <label for="PUESTO">Puesto: ()</label>
-                  <input type="text" class="form-control" name="PUESTO" placeholder="Puesto a laborar." required>
+                  <select name="PUESTO" class="form-control" required>
+                  @foreach ($puestos as $puesto => $pto)
+                     echo "<option value='{{$pto->id}}' selected>{{$pto->puesto}}</option>"; 
+                  @endforeach   
+                  </select>
               </div>
               <div class="form-horizontal form-group col-sm-10">
                   <label for="ADSCRIPCION">Adscripción: ()</label>

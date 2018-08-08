@@ -2,9 +2,9 @@
     <!-- Logo -->
     <a href="/" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>R</b>H</span>
+      <span class="logo-mini"><b>C</b>R</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>R</b>ecursos <b>H</b></span>
+      <span class="logo-lg"><b>C</b>ontrol <b>R</b></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
@@ -134,7 +134,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="/users/perfil" class="btn btn-default btn-flat">Perfil</a>
+                  <a href="/perfil" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
 
