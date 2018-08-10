@@ -1,15 +1,15 @@
 <?php
 
-namespace RecHum\Http\Controllers;
+namespace rechum\Http\Controllers;
 
 use Illuminate\Http\Request;
-use RecHum\Http\Requests;
-use RecHum\Http\Requests\LoginRequest;
+use rechum\Http\Requests;
+use rechum\Http\Requests\LoginRequest;
 use Auth;
 use Session;
 use Redirect;
 
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Controllers\Controller;
 
 class LogController extends Controller
 {
