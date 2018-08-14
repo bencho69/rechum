@@ -44,7 +44,6 @@ Route::group(['middleware' => 'auth'], function () {
    //Controlador para subir imagen del municipio.
    Route::get('subirmpo', 'MunicipiosController@subirmpo')->name('subirmpo');
 
-
    Route::get('admin', function()
    {
    	 return view('admin.index',['active'=>'0', 'subm'=>'0', 'subm2'=>'0']);

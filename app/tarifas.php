@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum;
+namespace rechum;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -9,7 +9,7 @@ use rechum\Http\Controllers\Controller;
 
 use DB;
 Use Session;
-use rechum\Tarifas;
+use rechum\tarifas;
 
 class TarifasController extends Controller
 {

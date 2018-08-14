@@ -76,7 +76,7 @@ class EmpleadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id, $filtro="")
     {
         $empleado = DB::table('empleados')
                       ->where('id','=', $id)
@@ -90,7 +90,7 @@ class EmpleadoController extends Controller
                       ->get();
         $nivelesc = ['PRIMARIA','SECUNDARIA','PREPARATORIA','LICENCIATURA','MAESTRIA','DOCTORADO','ESPECIALIDAD'];
         //$nivelesc = { {Dato: 'PRIMARIA'}, {Dato: 'SECUNDARIA'}, {Dato: 'PREPARATORIA'}, {Dato: 'LICENCIATURA'}, {Dato: 'MAESTRIA'}, {Dato: 'DOCTORADO'}, {Dato: 'ESPECIALIDAD'} };
-        return view('empleados.editarall',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','accion'=>'0','empleado'=>$empleado,'puestos'=>$puestos, 'adscrip'=>$adscrip,'nivelesc'=>$nivelesc]); 
+        return view('empleados.editarall',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','accion'=>'0','empleado'=>$empleado,'puestos'=>$puestos, 'adscrip'=>$adscrip,'nivelesc'=>$nivelesc, 'filtro'=>$filtro]); 
     }
 
     /**
@@ -144,8 +144,19 @@ class EmpleadoController extends Controller
         //$emps = \empleados::paginate($this->Indice);
 
         Session::flash('message','Empleado Editado correctamente');
-
-        return view('admin.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0']);
+        $filtro = $request['filtro'];
+        if($filtro != ""){
+          $empleados = empleados::where('NOMBRE_COMPLETO',"LIKE", "%$filtro%")
+                         ->orWhere('RFC','like','%'.$filtro.'%')
+                         ->orderBy('apaterno','ASC')
+                         ->paginate();
+        }else{
+          $empleados = empleados::orderBy('apaterno','ASC')
+                         ->paginate(); 
+        }
+        return view('empleados.lista',['active'=>'2', 'subm'=>'1', 'subm2'=>'0','empleados' => $empleados,'filtro'=>$filtro]);
+       // else    
+       //   return view('admin.index',['active'=>'2', 'subm'=>'1', 'subm2'=>'0']);
     }
 
     /**
