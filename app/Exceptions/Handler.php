@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Exceptions;
+namespace rechum\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

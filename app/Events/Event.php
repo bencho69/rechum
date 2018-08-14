@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Events;
+namespace rechum\Events;
 
 abstract class Event
 {

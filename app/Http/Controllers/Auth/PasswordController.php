@@ -1,8 +1,8 @@
 <?php
 
-namespace RecHum\Http\Controllers\Auth;
+namespace rechum\Http\Controllers\Auth;
 
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Auth;
 class PasswordController extends Controller

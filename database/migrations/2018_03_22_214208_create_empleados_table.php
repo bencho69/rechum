@@ -14,7 +14,7 @@ class CreateEmpleadosTable extends Migration
     {
         Schema::create('empleados', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('no',80); 
+            $table->unsignedInteger('no'); 
             $table->string('BIMESTRE',80); 
             $table->string('AniO',80); 
             $table->string('FOLIO',80); 
@@ -48,6 +48,7 @@ class CreateEmpleadosTable extends Migration
             $table->string('PUESTO_DIR_PRES',80); 
             $table->string('NOOFPRES',80); 
             $table->string('FECHAOFICIO',80); 
+            $table->unsignedInteger('funciones'); 
             $table->text('FUNCIONESPUESTO');
             $table->string('TipoContrato',80); 
             $table->string('Estatus',80); 
@@ -58,7 +59,7 @@ class CreateEmpleadosTable extends Migration
             $table->string('apaterno',80); 
             $table->string('amaterno',80); 
             $table->enum('DIRECCION', ['DIRECCION DE AFILIACION Y OPERACIÓN','DIRECCION DE GESTION Y SERVICIOS DE SALUD','DIRECCION GENERAL'])->default('DIRECCION GENERAL');
-            $table->string('ESCOLARIDAD',80); 
+            $table->enum('ESCOLARIDAD', ['PRIMARIA','SECUNDARIA','PREPARATORIA','LICENCIATURA','MAESTRIA','DOCTORADO','ESPECIALIDAD']); 
             $table->string('FECHA_INGRESO',80); 
             $table->string('NOMBRENOM',80); 
             $table->string('CLABE',80); 

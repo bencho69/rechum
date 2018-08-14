@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Console\Commands;
+namespace rechum\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

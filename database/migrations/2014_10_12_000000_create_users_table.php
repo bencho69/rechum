@@ -18,7 +18,10 @@ class CreateUsersTable extends Migration
             $table->enum('tipo', ['ADMIN', 'USR'])->default('USR');
             $table->string('email')->unique();
             $table->string('password', 60);
+            $table->unsignedInteger('usuario_id')->nullable();
             $table->binary('imagen')->nullable();
+            $table->string('RECHUM',1)->default('N');
+            $table->string('PASAJES',1)->default('N');
             $table->rememberToken();
             $table->timestamps();
         });
