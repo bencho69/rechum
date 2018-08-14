@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Http\Requests;
+namespace rechum\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 

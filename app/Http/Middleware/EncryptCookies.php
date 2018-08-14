@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Http\Middleware;
+namespace rechum\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

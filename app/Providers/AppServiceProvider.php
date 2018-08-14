@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Providers;
+namespace rechum\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

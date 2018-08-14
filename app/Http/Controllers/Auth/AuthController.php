@@ -1,10 +1,10 @@
 <?php
 
-namespace RecHum\Http\Controllers\Auth;
+namespace rechum\Http\Controllers\Auth;
 
-use RecHum\User;
+use rechum\User;
 use Validator;
-use RecHum\Http\Controllers\Controller;
+use rechum\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

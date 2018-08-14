@@ -1,6 +1,6 @@
 <?php
 
-namespace RecHum\Providers;
+namespace rechum\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'RecHum\Events\SomeEvent' => [
-            'RecHum\Listeners\EventListener',
+        'rechum\Events\SomeEvent' => [
+            'rechum\Listeners\EventListener',
         ],
     ];
 
