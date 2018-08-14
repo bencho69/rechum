@@ -21,7 +21,7 @@ class CreateEmpleadosTable extends Migration
             $table->string('NOMBRE_COMPLETO',80); 
             $table->string('RFC',20); 
             $table->string('CURP',20); 
-             $table->string('PUESTO',80); 
+            $table->string('PUESTO',80); 
             $table->string('ADSCRIPCION',80); 
             $table->string('ESTUDIOS',150); 
             $table->string('CALLE',80); 
@@ -59,7 +59,7 @@ class CreateEmpleadosTable extends Migration
             $table->string('apaterno',80); 
             $table->string('amaterno',80); 
             $table->enum('DIRECCION', ['DIRECCION DE AFILIACION Y OPERACIÓN','DIRECCION DE GESTION Y SERVICIOS DE SALUD','DIRECCION GENERAL'])->default('DIRECCION GENERAL');
-            $table->string('ESCOLARIDAD',80); 
+            $table->enum('ESCOLARIDAD', ['PRIMARIA','SECUNDARIA','PREPARATORIA','LICENCIATURA','MAESTRIA','DOCTORADO','ESPECIALIDAD']); 
             $table->string('FECHA_INGRESO',80); 
             $table->string('NOMBRENOM',80); 
             $table->string('CLABE',80); 

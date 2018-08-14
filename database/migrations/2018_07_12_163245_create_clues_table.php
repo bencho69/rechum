@@ -19,6 +19,9 @@ class CreateCluesTable extends Migration
             $table->string('localidad',80); 
             $table->unsignedInteger('km'); 
             $table->string('municipio',80);
+            $table->string('region',80);
+            $table->enum('tipou', ['URBANA','RURAL','SIN DATO'])->default('URBANA');
+            $table->enum('compfis', ['SI','NO'])->default('NO');
             $table->timestamps();
         });
     }

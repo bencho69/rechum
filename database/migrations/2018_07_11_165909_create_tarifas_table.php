@@ -20,7 +20,8 @@ class CreateTarifasTable extends Migration
             $table->enum('tarifa50', ['SI','NO'])->default('NO');
             $table->enum('moneda', ['PESOS','EURO/DOLAR'])->default('PESOS');
             $table->string('ciudad',300); 
-            $table->enum('ciudad', ['ESTATAL','NACIONAL','INTERNACIONAL'])->default('ESTATAL');
+            $table->enum('tipocom', ['ESTATAL','NACIONAL','INTERNACIONAL'])->default('ESTATAL');
+            $table->enum('mando',['OPERATIVO','MEDIO','SUPERIOR'])->default('OPERATIVO');
             $table->timestamps();
         });
     }

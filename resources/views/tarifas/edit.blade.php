@@ -67,7 +67,19 @@
                  
               ?> 
             </div>  
-
+            <div class="form-group col-sm-6">
+               <label for="turno">Tipo de mando: (<code style="color:DodgerBlue;"><?php echo $tarifa->mando; ?></code>)</label> <br>
+               <?php if ($tarifa->mando == "OPERATIVO")  
+                        echo "<input type='radio' name='mando' value='OPERATIVO' checked> OPERATIVO<br>"; 
+                     else 
+                        echo "<input type='radio' name='mando' value='OPERATIVO'> OPERATIVO<br>";
+                     if ($tarifa->mando == "MEDIO") echo "<input type='radio' name='mando' value='MEDIO' checked> MEDIO<br>"; 
+                     else echo "<input type='radio' name='mando' value='NACIONAL'> NACIONAL<br>";
+                     if ($tarifa->mando == "SUPERIOR") echo "<input type='radio' name='mando' value='SUPERIOR' checked> SUPERIOR<br>" ;
+                     else echo "<input type='radio' name='mando' value='SUPERIOR'> SUPERIOR<br>";
+                 
+              ?> 
+            </div>  
             <fieldset class="form-group form-group col-sm-12">  
               <div class="form-horizontal form-group col-sm-12">
               <legend>Informacíon Adicional :</legend>
@@ -77,7 +89,6 @@
                      <textarea class="form-control" rows="5" id="ciudad" name="ciudad">{{  $tarifa->ciudad }}</textarea>
                 </div> 
               </div>
-             
               <input class="btn btn-primary" type="submit" value="Actualizar y Guardar">             
             </fieldset>
           </form>  

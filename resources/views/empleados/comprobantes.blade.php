@@ -16,10 +16,13 @@
             {
                 if (is_dir($archivo))//verificamos si es o no un directorio
                 {
-                    //echo "[" . $archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
+                    // echo "[" . $archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
                 }
                 else
                 { 
+                       //-- Para el orionms.com.mx debe ir apuntando a public.  
+                       //$arch =  "/public/expediente/" . $RFC . "/fotografia.jpg";
+
                     echo "<a href= " . "'" . "/comprobantes/" . $RFC . "/" . $archivo . "'>" .$archivo. "</a> "; 
                    
                     ?>

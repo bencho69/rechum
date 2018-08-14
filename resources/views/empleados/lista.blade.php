@@ -35,7 +35,7 @@
     @foreach ($empleados as $row)
       <tr>
       <td> {{ $row->id }} </td> <td> {{ $row->NOMBRE_COMPLETO }} </td>
-      <td> <a href="{{ route('empleados.edit', [$row->id,'filtro'=>$filtro]) }}">{{ $row->RFC }}</a>  </td> <td> {{ $row->PUESTO }}</td>
+      <td> <a href="{{ route('empleados.edit', [$row->id, $filtro]) }}">{{ $row->RFC }}</a>  </td> <td> {{ $row->PUESTO }}</td>
       <td> {{ $row->ADSCRIPCION }} </td> <td> {{ $row->DIRECCION }}</td>
       <td  class='col-sm-1' style='display: inline; width: 150px; margin: auto; '>
         <a href="{{ route('empleados.show', $row->id) }}" class="btn btn-link"><span class="oi oi-eye"></span></a>

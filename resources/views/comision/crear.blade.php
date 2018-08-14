@@ -232,21 +232,9 @@
 
 
     function montoviaticos(){
-      function diaSemana(x) {
-        let date = new Date(x.value.replace(/-+/g, '/'));
 
-        let options = {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
-        };
-        document.getElementById('demo').innerHTML = date.toLocaleDateString('es-MX', options);
-      }
-
-      let dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado","Domingo"];
       var x = document.getElementById('inicioC');
-          y = document.getElementById('finalC');
+      var y = document.getElementById('finalC');
           if (x.value == "" || y.value == ""){
             alert('Fecha de inicio y/o Fin de la comision debe tener un valor.\n\nSeleccione la fecha inicial y/o fecha final de la comisión."\n\nGracias.');
             return;
@@ -255,11 +243,20 @@
             alert('Fecha de termino de la comisión debe ser mayor o igual a la fecha de inicio de ésta.\n\nSeleccione la fecha correcta."\n\nGracias.');
             return;   
           }
-          diaSemana(x.value);
-      var periodo=y.getdate()-x.getdate();
-          alert("periodo="+periodo)
+          var fechaf = x.split("/");
+          var day = fechaf[0];
+          var month = fechaf[1];
+          var year = fechaf[2];
+          var dia = new date(year, month, day);
+          
+          let dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo"];
+          alert('el dia es ' + dias[dia.getDay()]);
+          if (dia >= 6 ){
+             alert('el periodo contiene dias inhabiles.\nEs correcto?');
+          }   
           
     }
+    var m4xD47e = new Date().toISOString().substr(0, 10);
   </script>
 	<div class="col-md-12">
     <div class="box box-primary ">
@@ -391,6 +388,7 @@
               </div>
               <div class="col-sm-10">
                 <input type="text" name="viaticos" id="monto" class="form-control" placeholder="Monto_autorizado * numero_de_días."> 
+
                 <button type="button" onclick="montoviaticos();"> Para calcular el monto segun días de comisión de clic aquí.</button>
               </div>
             </div>

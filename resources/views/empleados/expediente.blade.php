@@ -23,6 +23,8 @@
                     En formato JPG (imagen) hasta 1Mb. de tamaño máximo. <br> 
                     <?php 
                        $dir = public_path() . "/expediente/" . $RFC . "/fotografia.jpg";
+                       //-- Para el orionms.com.mx debe ir apuntando a public.  
+                       //$arch =  "/public/expediente/" . $RFC . "/fotografia.jpg"; 
                        $arch =  "/expediente/" . $RFC . "/fotografia.jpg";
                     ?> 
                     @if(file_exists($dir)) 
