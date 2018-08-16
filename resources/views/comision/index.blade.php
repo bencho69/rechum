@@ -26,8 +26,7 @@
         {!! Form::close() !!}
     </div>
     @include('alerts.success')
-    <section id="info">
-    </section>  
+ 
     <section id="blog"> 
   <table class="table table-bordered table-hover" style="width: 95%;">
     <thead>
@@ -49,8 +48,8 @@
       <td> {{ $row->objetivo }} </td>
       <td  class='col-sm-1' style='display: inline; width: 150px; margin: auto; '>
         <a href="{{ route('comision.edit', ['id'=>$row->id,'filtro'=>$filtro]) }}" class="btn btn-link"><span class="oi oi-eye"></span></a>
-        <a href="{{ route('comision.edit', ['id'=>$row->id,'filtro'=>$filtro]) }}" class="btn btn-link"><span class="oi oi-pencil"></span></a>
-        <a href="{{ route('comision.destroy', $row->id) }}" class="btn btn-link"><span class="oi oi-pencil"></span></a>
+        <a href="{{ route('comision.destroy', $row->id) }}" class="btn btn-link"><span class="oi oi-trash"></span></a>
+        <a href="{{ route('comision.acuerdo', ['id'=>$row->id,'filtro'=>$filtro]) }}" class="btn btn-link"><span class="oi oi-text"></span></a>
       </td></tr>
     @endforeach 
     
@@ -74,8 +73,6 @@
             {!! $coms->render() !!}
             <div><a href="{{route('comision.create')}}" class="btn btn-primary">Crear Comision</a></div>
         </div>
-  </section id="info">
-  <section>
-    
-  </section>  
+  </section >
+
 @endsection

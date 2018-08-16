@@ -9,6 +9,7 @@ use rechum\Http\Controllers\Controller;
 
 use rechum\comisiones;
 use Session;
+use Redirect;
 
 class comisionController extends Controller
 {
@@ -189,7 +190,30 @@ class comisionController extends Controller
      */
     public function store(Request $request)
     {
-        return "estoy guardando";
+        $com = new comisiones;
+
+        $com->no = $request['no'];
+        $com->fechaof = $request['fechaof'];
+        $com->fechainc = $request['fechainc'];
+        $com->fechafinc = $request['fechafinc'];
+        $com->origen = $request['origen'];
+        $com->destino = $request['destino'];
+        $com->objetivo = $request['objetivo'];
+        $com->km = $request['km'];
+        $com->programa = "";
+        $com->viaticos = $request['viaticos'];
+        $com->combustible = $request['combustible'];
+        $com->pasajes = $request['pasajes'];
+        $com->otro = $request['otro'];
+        $com->total = 0;
+        $com->autorizada = "NO";
+        $com->observaciones = "";
+        $com->Save();
+
+        //Session::flash('message','Comision guardada correctamente.');
+    
+        return Redirect::route('comision.edit', $com->id)->with('filtroN', '');
+        //return view('comision.detalle',['comisiones'=>$com, 'active'=>3,'subm'=>3,'subm2'=>1]);
     }
 
     /**
@@ -209,9 +233,35 @@ class comisionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, Request $request)
     {
-        //
+       // Datos recibidos al actualizar pagina
+       if (isset($request['filtroN'])){
+          $filtroN = $request['filtroN'];
+          $this->filtroN = $filtroN;
+       }
+       else{
+          if(isset($this->filtroN)){
+              $filtroN = $this->filtroN;
+          }
+          else{
+              $filtroN = "";
+          }
+       }
+
+       $com = comisiones::find($id);
+       $empleados = \DB::select('Select EC.*,E.NOMBRE_COMPLETO 
+From emp_comision EC, empleados E, tarifas T
+Where E.id = EC.empleado_id and T.id=EC.tarifa_id and EC.comision_id=' . $id);
+
+       //$fechaInicio = \Carbon::parse($com->input('fechainc'));
+       //$fechaFin    = \Carbon::parse($com->input('fechafinc'));
+       $fechain = strtotime($com->fechainc);
+       $fechafin = strtotime($com->fechafinc);
+       $fechadif = $fechafin - $fechain;
+       $totalDays = intval($fechadif/(24*60*60));
+
+       return view('comision.detalle',['com'=>$com, 'active'=>4,'subm'=>2,'subm2'=>1,'filtroN'=>$filtroN,'empleados'=>$empleados,'periodo'=>$totalDays]);
     }
 
     /**
@@ -236,4 +286,65 @@ class comisionController extends Controller
     {
         //
     }
+
+    public function acuerdo($id)
+    {
+        //
+    }
+
+    public function addemp($id, Request $request)
+    {
+       if (isset($request['filtroN'])){
+          $filtroN = $request['filtroN'];
+          $this->filtroN = $filtroN;
+       }
+       else{
+          if(isset($this->filtroN)){
+              $filtroN = $this->filtroN;
+          }
+          else{
+              $filtroN = "";
+          }
+       }
+       if(isset($request['empleado_id'])){
+         $empleado_id = $request['empleado_id'];
+         $this->empleado =  $empleado_id;
+       }
+       else{
+          if(isset($this->empleado)){
+            $empleado_id = $this->empleado;
+        }else{
+            $empleado_id = 0;
+        }
+       }
+       if (isset($request['no'])){
+          $no = $request['no'];
+       }
+       else{
+              $no = 0;
+       }
+       if (isset($request['periodo'])){
+          $periodo = $request['periodo'];
+       }
+       else{
+              $periodo = 0;
+       }
+       $empleados = \DB::table('empleados')
+                  ->Where('NOMBRE_COMPLETO','like','%'.$filtroN.'%')
+                  ->orderBy('NOMBRE_COMPLETO', 'ASC')
+                  ->get();
+      if($empleado_id != 0){
+         $empleado = \DB::table('empleados')->Where('id','=',$empleado_id)->first();
+         $PuestoB = $empleado->PUESTO;
+         $puesto = \DB::table('funciones')->Where('puesto','=',$PuestoB)->first();
+         $tarifas = \DB::table('tarifas')->Where('mando','=',$puesto->mando)->get();
+       }else
+          $tarifas = \DB::table('tarifas')->get();
+
+      //$fechaInicio = \Carbon::parse($req->input('fecha_emision'));
+
+
+       return view('comision.addemp',['com'=>$id, 'active'=>4,'subm'=>2,'subm2'=>1,'filtroN'=>$filtroN,'empleados'=>$empleados,'empleado_id'=>$empleado_id,'tarifas'=>$tarifas,'no'=>$no,'periodo'=>$periodo]);
+    }
+
 }

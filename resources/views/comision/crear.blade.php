@@ -19,73 +19,6 @@
   @if (session()->has('message'))
     @include('alerts.alerta')
   @endif
-	  <div class="col-md-12">
-     <!-- SELECT2 EXAMPLE -->
-      <div class="box box-default">
-        <div class="box-header with-border">
-          <h3 class="box-title">Seleccionar Empleado</h3>
-
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
-          </div>
-        </div>
-        <!-- /.box-header -->
-        <div class="box-body">
-          <div class="row">
-            <div class="col-md-6">
-              <div class="form-group">
-                {!! Form::open(['route' => 'comision.create', 'method' => 'GET', 'class'=> 'navbar-form navbar-left']) !!}
-                <label>Empleados</label>
-                <select class="form-control" style="width: 100%;" name="empleado_id">
-                @foreach($empleados as $emp)
-                   @if($emp->id == \Auth::user()->usuario_id && isset(\Auth::user()->usuario_id))
-                     <option value="{{$emp->id}}" selected>{{$emp->NOMBRE_COMPLETO}}</option>
-                   @else
-                     @if(isset($empleado_id) && $emp->id == $empleado_id)
-                       <option value="{{$emp->id}}" selected>{{$emp->NOMBRE_COMPLETO}}</option>
-                     @else
-                        <option value="{{$emp->id}}">{{$emp->NOMBRE_COMPLETO}}</option>
-                     @endif
-                   @endif
-                @endforeach
-              </select>
-              <input type="hidden" name="filtroN" value="{{ $filtroN }}">
-              <input type="hidden" name="filtroO" value="{{ $filtroO }}">
-              <input type="hidden" name="filtroD" value="{{ $filtroD }}">
-              <input type="hidden" name="ORIGEN" value="{{ $origen }}">
-              <input type="hidden" name="DESTINO" value="{{ $destino }}">
-              <button type="submit" class="btn btn-default">Seleccionar</button>
-                    {!! Form::close() !!}
-              </div>
-              <!-- /.form-group -->
-            </div>
-            <!-- /.col -->
-            <div class="col-md-6">
-              <div class="form-group">
-                    {!! Form::open(['route' => 'comision.create', 'method' => 'GET', 'class'=> 'navbar-form navbar-left']) !!}
-                      Nombre:
-                      {!! Form::text('filtroN',$filtroN, ['class' => 'form-control','placeholder'=>'Nombre del empleado']) !!}
-                <input type="hidden" name="filtroO" value="{{ $filtroO }}">
-                <input type="hidden" name="filtroD" value="{{ $filtroD }}">
-                <input type="hidden" name="empleado_id" value="{{ $empleado_id }}">
-                <input type="hidden" name="ORIGEN" value="{{ $origen }}">
-                <input type="hidden" name="DESTINO" value="{{ $destino }}">
-                    <button type="submit" class="btn btn-default">Buscar</button>
-                    {!! Form::close() !!}
-              </div>
-            </div>
-            <!-- /.col -->
-          </div>
-          <!-- /.row -->
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Selecciona el filtro para reducir la lista de los origenes, al buscado.
-        </div>
-      </div>
-      <!-- /.box -->
-  </div>
   <div class="col-md-12">
      <!-- SELECT2 EXAMPLE -->
       <div class="box box-default">
@@ -273,13 +206,13 @@
           <div class="box-body">
             <div class="col-sm-10">
 		        <div class="col-sm-2 control-label">
-              <label for="">No:</label>
+              <label for="no">No:</label>
             </div>
             <div class="col-sm-4">
               <input type="number" name="no" class="form-control" placeholder="Ingresa el numero de la comision. <Se crea automaticamente>" value="{{$no}}">
 		        </div>
 		        <div class="col-sm-2 control-label">
-              <label for="">Fecha oficio:</label>
+              <label for="fechaof">Fecha oficio:</label>
             </div>
             <div class="col-sm-4">
               <input type="date" name="fechaof" class="form-control" placeholder="Ingresa la fecha del oficio de comision.">
@@ -289,66 +222,52 @@
           <div class="box-body">
             <div class="col-sm-10">
             <div class="col-sm-2 control-label">
-              <label for="">Fecha Inicio:</label>
+              <label for="fechainc">Fecha Inicio:</label>
             </div>
             <div class="col-sm-4">
-              <input type="date" name="fechain" class="form-control" placeholder="Ingrese la fecha de Inicio de la comision" id="inicioC">
+              <input type="date" name="fechainc" class="form-control" placeholder="Ingrese la fecha de Inicio de la comision" id="inicioC">
             </div>
             <div class="col-sm-2 control-label">
-              <label for="">Fecha final de la comisión:</label>
+              <label for="fechafinc">Fecha final de la comisión:</label>
             </div>
             <div class="col-sm-4">
-              <input type="date" name="fechafin" class="form-control" placeholder="Ingresa la fecha final de la comision." id="finalC">
+              <input type="date" name="fechafinc" class="form-control" placeholder="Ingresa la fecha final de la comision." id="finalC">
             </div> 
             </div>       
           </div>
           <div class="box-body">
+
             <!-- Otra Linea -->
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
-                <label for="">Empleado: </label>
+                <label for="origen">Lugar de origen de la comisión:</label>
               </div>
               <div class="col-sm-10">
-                
-                  @foreach($empleados as $emp)
-                     @if($emp->id == $empleado_id)
-                       <input type="text" class="form-control" disable placeholder="Elige el empleado." value="{{$emp->NOMBRE_COMPLETO}}" >
-                     @endif
-                  @endforeach
-                
-              </div>
-            </div> 
-            <!-- Otra Linea -->
-            <div class="col-sm-12">
-              <div class="col-sm-2 control-label">
-                <label for="">Lugar de origen de la comisión:</label>
-              </div>
-              <div class="col-sm-10">
-                <input type="text" name="ORIGEN" class="form-control" placeholder="Ingresa el CLUES, MAOS o Ciudad de donde partiras." value="{{ $origen}}" id="origen">  
+                <input type="text" name="origen" class="form-control" placeholder="Ingresa el CLUES, MAOS o Ciudad de donde partiras." value="{{ $origen}}" id="origen">  
               </div>
             </div>
             <!-- Otra Linea -->
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
-                <label for="">Lugar de destino de la comisión:</label>
+                <label for="destino">Lugar de destino de la comisión:</label>
               </div>
               <div class="col-sm-10">
-                <input type="text" name="DESTINO" class="form-control" placeholder="Ingresa el CLUES, MAOS o Ciudad a donde llegaras." value="{{ $destino}}" id="destino"> 
+                <input type="text" name="destino" class="form-control" placeholder="Ingresa el CLUES, MAOS o Ciudad a donde llegaras." value="{{ $destino}}" id="destino"> 
               </div>
             </div>
             <!-- Otra Linea -->    
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
-                <label for="">kilometraje a recorrer (Km)</label>
+                <label for="km">kilometraje a recorrer (Km)</label>
               </div>
               <div class="col-sm-10">
                 @foreach($lugard as $emp)
                    @if($emp->NombreO == $destino)
-                     <input type="text" class="form-control" disable placeholder="kilometraje." value="{{$emp->km}}">
+                     <input type="text" name ="km" class="form-control" placeholder="kilometraje." value="{{$emp->km}}">
                    @endif
                 @endforeach
                 @if($destino == "")
-                     <input type="text" class="form-control" placeholder="Indique el kilometraje.">
+                     <input type="text" name ="km" class="form-control" placeholder="Indique el kilometraje.">
                 @endif  
                 <button type="button" onclick="ruta_google();"> Para calcular la ruta seleccionada de clic aquí, luego en el enlace.</button>
                 <a target="_blank" href="https://www.google.com.mx/maps/dir/17.5338657,-99.4947898/17.5342549,-99.4913194/@17.5333596,-99.4943691,17z/data=!3m1!4b1!4m2!4m1!3e0" id="rutagoogle"> Ver Cálculo Distancia</a>
@@ -358,44 +277,27 @@
             <!-- Otra Linea -->
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
-                <label for="">Motivo u objeto de la comisión:</label>
+                <label for="objetivo">Motivo u objeto de la comisión:</label>
               </div>
               <div class="col-sm-10">
                 <textarea name="objetivo" rows="3" cols="80">
                 </textarea>  
               </div>
             </div>
-            <!-- Otra Linea -->
-            <div class="col-sm-12">
-              <div class="col-sm-2 control-label">
-                <label for="">Tarifa a utilizar:</label>
-              </div>
-              <div class="col-sm-10"> 
-                <select class="form-control select2" style="width: 100%;" name="DESTINO">
-  
-                @foreach($tarifas as $t)
-                     <option value="{{$t->id}}">{{$t->concepto}} Grupo J.: {{$t->grupoj}} Tarifa: {{$t->tarifa}} Tarifa 50%: {{$t->tarifa50}} Tipo C.: {{$t->tipocom}} Moneda: {{$t->moneda}}</option>
-                @endforeach
-
-                </select>
-              </div>
-            </div>
             
             <!-- Otra Linea -->
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
-                <label for="">Monto a solicitar de viaticos:</label>
+                <label for="viaticos">Monto a solicitar de viaticos:</label>
               </div>
               <div class="col-sm-10">
                 <input type="text" name="viaticos" id="monto" class="form-control" placeholder="Monto_autorizado * numero_de_días."> 
-
-                <button type="button" onclick="montoviaticos();"> Para calcular el monto segun días de comisión de clic aquí.</button>
               </div>
             </div>
             <!-- Otra Linea -->
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
-                <label for="">Monto a solicitar de pasajes Foraneos:</label>
+                <label for="pasajes">Monto a solicitar de pasajes Foraneos:</label>
               </div>
               <div class="col-sm-10">
                 <input type="text" name="pasajes" class="form-control" placeholder="Ingresa el monto de pasajes foraneos."> 
@@ -404,7 +306,7 @@
             <!-- Otra Linea -->
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
-                <label for="">Monto a solicitar de combustible:</label>
+                <label for="combustible">Monto a solicitar de combustible:</label>
               </div>
               <div class="col-sm-10">
                 <input type="text" name="combustible" class="form-control" placeholder="Ingresa el monto de combustible."> 
@@ -413,19 +315,17 @@
             <!-- Otra Linea -->
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
-                <label for="">Monto a solicitar para otros gastos:</label>
+                <label for="otro">Monto a solicitar para otros gastos:</label>
               </div>
               <div class="col-sm-10">
-                <input type="text" name="combustible" class="form-control" placeholder="Ingresa el monto de combustible."> 
+                <input type="text" name="otro" class="form-control" placeholder="Ingresa el monto de combustible."> 
               </div>
             </div>
           </div>
               <!-- /.box-body -->
           <div class="box-footer col-sm-4">
             <input type="hidden" id="FiltroN" value="{{ $filtroN }}">
-            @if(isset($empleado_id) && $empleado_id != 0)
             <input type="submit" class="btn btn-primary "  value="Guardar">
-            @endif
           </div>
         </form>
         <!-- /.box-footer-->
