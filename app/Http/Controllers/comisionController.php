@@ -8,6 +8,7 @@ use rechum\Http\Requests;
 use rechum\Http\Controllers\Controller;
 
 use rechum\comisiones;
+use rechum\emp_comision;
 use Session;
 use Redirect;
 
@@ -273,7 +274,17 @@ Where E.id = EC.empleado_id and T.id=EC.tarifa_id and EC.comision_id=' . $id);
      */
     public function update(Request $request, $id)
     {
-        //
+        $com = comisiones::find($id);
+        $com->objetivo = $request['objetivo'];
+        $com->programa = $request['programa'];
+        $com->viaticos = $request['viaticos'];
+        $com->combustible = $request['combustible'];
+        $com->pasajes = $request['pasajes'];
+        $com->otro = $request['otro'];
+        $com->total = $request['viaticos']+$request['combustible']+$request['pasajes']+$request['otro'];
+        $com->Save();
+
+        return Redirect::route('comision.index')->with('filtroN', '');
     }
 
     /**
@@ -284,12 +295,16 @@ Where E.id = EC.empleado_id and T.id=EC.tarifa_id and EC.comision_id=' . $id);
      */
     public function destroy($id)
     {
-        //
+        return "Estoy en destruir comision";
     }
 
     public function acuerdo($id)
     {
-        //
+       $datos = comisiones::find($id);
+       $PUESTODIRECTORGRAL = "ENCARGADO DE LA DIRECCIÓN DE
+ADMINISTRACIÓN Y FINANCIAMIENTO";
+       $NombDirector = "Juan Manuel Jimenez Herrera";
+       return view('comision.acuerdo',['Datos'=>$datos,'PUESTODIRECTORGRAL'=>$PUESTODIRECTORGRAL,'NombDirector'=>$NombDirector]);
     }
 
     public function addemp($id, Request $request)
@@ -342,9 +357,29 @@ Where E.id = EC.empleado_id and T.id=EC.tarifa_id and EC.comision_id=' . $id);
           $tarifas = \DB::table('tarifas')->get();
 
       //$fechaInicio = \Carbon::parse($req->input('fecha_emision'));
-
+      $id = $request['id'];
 
        return view('comision.addemp',['com'=>$id, 'active'=>4,'subm'=>2,'subm2'=>1,'filtroN'=>$filtroN,'empleados'=>$empleados,'empleado_id'=>$empleado_id,'tarifas'=>$tarifas,'no'=>$no,'periodo'=>$periodo]);
     }
 
+    public function storeemp(Request $request)
+    {
+       $com = new emp_comision;
+
+        $com->empleado_id = $request['empleado_id'];
+        $com->comision_id = $request['comision_id'];
+        $com->tarifa_id = $request['tarifa'];
+        $com->vehiculo_noe = $request['placas'];;
+        $com->programa = "";
+        $com->viaticos = $request['viaticos'];
+        $com->combustible = $request['combustible'];
+        $com->pasajes = $request['pasajes'];
+        $com->otro = $request['otro'];
+        $com->total = $request['viaticos']+$request['combustible']+$request['pasajes']+$request['otro'];
+        $com->Save();
+
+        //Session::flash('message','Comision guardada correctamente.');
+    
+        return Redirect::route('comision.edit', $com->id)->with('filtroN', '');
+    }  
 }
