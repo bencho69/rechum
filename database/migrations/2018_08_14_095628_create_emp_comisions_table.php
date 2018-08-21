@@ -17,7 +17,14 @@ class CreateEmpComisionsTable extends Migration
             $table->unsignedInteger('empleado_id');
             $table->unsignedInteger('comision_id');
             $table->unsignedInteger('tarifa_id');
-            $table->unsignedInteger('vehiculo_id');
+            $table->string('vehiculo_noe',12);
+            // Datos de su comprobación.
+            $table->string('programa',80);
+            $table->decimal('viaticos', 5, 2);
+            $table->decimal('combustible', 5, 2);
+            $table->decimal('pasajes', 5, 2);
+            $table->decimal('otro', 5, 2);
+            $table->decimal('total', 5, 2);
             $table->foreign('empleado_id')
                   ->references('id')->on('comisiones')
                   ->onDelete('cascade');
