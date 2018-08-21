@@ -31,8 +31,9 @@
             var 
           }
         </script>
-        <form class="form-horizontal" method="POST" action="{{route('comision.update')}}" onsubmit="return valida(this)">
+        <form class="form-horizontal" method="POST" action="{{route('comision.update', $com->id)}}" onsubmit="return valida(this)">
             {{ csrf_field() }}
+            {{ method_field('PUT') }}
           <div class="box-body">
             <div class="col-sm-10">
             <div class="col-sm-2 control-label">
@@ -147,7 +148,7 @@
           </div>
               <!-- /.box-body -->
           <div class="box-footer col-sm-4">
-            <input type="hidden" id="FiltroN" value="{{ $filtroN }}">
+            <input type="hidden" name="FiltroN" value="{{ $filtroN }}">
             <input type="submit" class="btn btn-primary "  value="Modificar">
           </div>
         </form>

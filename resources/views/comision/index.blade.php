@@ -28,8 +28,9 @@
     @include('alerts.success')
  
     <section id="blog"> 
-  <table class="table table-bordered table-hover" style="width: 95%;">
-    <thead>
+  <div class="table-responsive">  
+  <table class="table table-bordered" style="width: 95%;">
+    <thead >
     <tr role="row">
       <th class="sorting" aria-control="example2" aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending">id
       </th>
@@ -37,24 +38,35 @@
       <th>Origen</th>
       <th>Destino</th>
       <th>Objetivo</th>
-      <th>ACCION</th>
+      <th width="150px" align="center">ACCION</th>
+      <th>Autorizada</th>
+      <th>Observaciones</th>
     </tr>
     </thead>
     {!! $coms->render() !!}
     @foreach ($coms as $row)
       <tr>
-      <td> {{ $row->id }} </td> <td> {{ $row->fecha }} </td>
+      <td> {{ $row->id }} </td> <td> {{ $row->fechaof }} </td>
       <td> {{ $row->origen }} </td> <td> {{ $row->destino }} </td>
       <td> {{ $row->objetivo }} </td>
       <td  class='col-sm-1' style='display: inline; width: 150px; margin: auto; '>
         <a href="{{ route('comision.edit', ['id'=>$row->id,'filtro'=>$filtro]) }}" class="btn btn-link"><span class="oi oi-eye"></span></a>
-        <a href="{{ route('comision.destroy', $row->id) }}" class="btn btn-link"><span class="oi oi-trash"></span></a>
-        <a href="{{ route('comision.acuerdo', ['id'=>$row->id,'filtro'=>$filtro]) }}" class="btn btn-link"><span class="oi oi-text"></span></a>
-      </td></tr>
+        <!-- <a href="{{ route('comision.destroy', [$row->id, 'method'=>'delete', '_token'=>csrf_field()]) }}" class="btn btn-link"><span class="oi oi-trash"></span></a>  -->
+        <form action="{{ url('/comision', ['id' => $row->id]) }}" method="post" style="display: inline;" >
+            {!! method_field('delete') !!}
+            {!! csrf_field() !!}
+            <button class="oi oi-trash" type="submit"></button>
+        </form>
+        <a href="{{ route('comision.acuerdo', ['id'=>$row->id,'filtro'=>$filtro]) }}" class="btn btn-link" style="display: inline;"><span class="oi oi-text"></span></a>
+      </td>
+       <td align="center">{{ $row->autorizada }}</td>
+       <td>{{ $row->observaciones }}</td>
+    </tr>
     @endforeach 
     
     {!! $coms->render() !!}
   </table> 
+</div>
   <script>
   $(function () {
     $('#example1').DataTable()

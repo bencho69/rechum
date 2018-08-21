@@ -49,13 +49,13 @@
                      @endif
                    @endif
                 @endforeach
-              </select>
-              <input type="hidden" name="filtroN" value="{{ $filtroN }}">
-              <input type="hidden" name="id" value="{{ $com }}">
-              <input type="hidden" name="no" value="{{ $no }}">
-              <input type="hidden" name="periodo" value="{{ $periodo }}">
-              <button type="submit" class="btn btn-default">Seleccionar</button>
-                    {!! Form::close() !!}
+                </select>
+                <input type="hidden" name="filtroN" value="{{ $filtroN }}">
+                <input type="hidden" name="id" value="{{ $com }}">
+                <input type="hidden" name="no" value="{{ $no }}">
+                <input type="hidden" name="periodo" value="{{ $periodo }}">
+                <button type="submit" class="btn btn-default">Seleccionar</button>
+                {!! Form::close() !!}
               </div>
               <!-- /.form-group -->
             </div>
@@ -65,6 +65,10 @@
                     {!! Form::open(['route' => 'comision.addemp', 'method' => 'GET', 'class'=> 'navbar-form navbar-left']) !!}
                       Nombre:
                       {!! Form::text('filtroN',$filtroN, ['class' => 'form-control','placeholder'=>'Nombre del empleado']) !!}
+                    <input type="hidden" name="id" value="{{ $com }}">
+                    <input type="hidden" name="no" value="{{ $no }}">
+                    <input type="hidden" name="periodo" value="{{ $periodo }}">
+                    <input type="hidden" name="empleado_id" value="{{ $empleado_id }}">
                     <button type="submit" class="btn btn-default">Buscar</button>
                     {!! Form::close() !!}
               </div>
@@ -85,10 +89,10 @@
   <div class="col-md-12">
     <div class="box box-primary ">
         <div class="box-header with-border">
-          <h3 class="box-title">Agregar un empleado a la comision. No ( {{ $no }} )</h3>
+          <h3 class="box-title">Agregar un empleado a la comision. No ( {{ $no }} ) {{ $com}}</h3>
         </div>
 
-        <form class="form-horizontal" method="POST" action="{{ route('comision.storeemp', $com )}}">
+        <form class="form-horizontal" method="POST" action="{{ route('comision.storeemp')}}">
             {{ csrf_field() }}
           <div class="box-body">
             <!-- Otra Linea -->
@@ -173,10 +177,19 @@
             <!-- Otra Linea -->
             <div class="col-sm-12">
               <div class="col-sm-2 control-label">
+                <label >En caso de solicitar vehículo, indique las placas o numero económico:</label>
+              </div>
+              <div class="col-sm-10">
+                <input type="text" name="placas" class="form-control" placeholder="Ingresa placas o no económico del vehículo.">
+              </div>
+            </div>
+            <!-- Otra Linea -->
+            <div class="col-sm-12">
+              <div class="col-sm-2 control-label">
                 <label>Monto a solicitar para otros gastos:</label>
               </div>
               <div class="col-sm-10">
-                <input type="text" name="combustible" class="form-control" placeholder="Ingresa el monto de combustible.">
+                <input type="text" name="otro" class="form-control" placeholder="Ingresa el monto de 'otros gastos'.">
               </div>
             </div>
           </div>
@@ -185,6 +198,9 @@
             <input type="hidden" name="FiltroN" value="{{ $filtroN }}">
             <input type="hidden" name="no" value="{{ $no }}">
             <input type="hidden" name="periodo" value="{{ $periodo }}">
+            <input type="hidden" name="empleado_id" value="{{ $empleado_id }}">
+            <input type="hidden" name="comision_id" value="{{ $com }}">
+            <input type="hidden" name="id" value="{{ $com }}">
             @if(isset($empleado_id) && $empleado_id != 0)
             <input type="submit" class="btn btn-primary "  value="Guardar">
             @endif
@@ -199,7 +215,31 @@
     }
     function Cambio(){
        var x = document.getElementById("selTarifa").value;
-       document.getElementById("demo").innerHTML = "You selected: " + x;
+       var k;
+       var tar = [
+         <?php 
+           $n = 0;
+           foreach ($tarifas as $tar => $t){
+           if ($n>0){
+              if (($n % 10) == 0){
+                 echo ", \n";
+              }
+              else{  
+                 echo ", ";
+              }  
+           }
+           echo "{id: " . $t->id . ", Tarifa: " . $t->tarifa . "}";  
+           $n = $n + 1;
+           }
+           ?>
+
+       ];
+       for (k = 0; k < tar.length; k++) {
+         if (x == tar[k].id){
+            document.getElementById("demo").innerHTML = "Seleccionaste : " + x + " Tarifa: " + tar[x].Tarifa + " por un periodo de " + {{ $periodo }};  
+            document.getElementById("monto").value = tar[x].Tarifa * {{ $periodo }};
+         }
+       }
     }
   </script>
 @endsection
